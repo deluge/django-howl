@@ -2,5 +2,5 @@
 branch = True
 omit =
     */__init__.py
-    pushify/migrations/*
-    pushify/tests/*
+    howl/migrations/*
+    howl/tests/*

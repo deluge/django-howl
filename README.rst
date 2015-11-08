@@ -1,17 +1,17 @@
-django-pushify
+django-howl
 ===============
 
-.. image:: https://badge.fury.io/py/django-pushify.png
-    :target: http://badge.fury.io/py/django-pushify
+.. image:: https://badge.fury.io/py/django-howl.png
+    :target: http://badge.fury.io/py/django-howl
 
-.. image:: https://travis-ci.org/deluge/django-pushify.svg?branch=master
-    :target: https://travis-ci.org/deluge/django-pushify
+.. image:: https://travis-ci.org/deluge/django-howl.svg?branch=master
+    :target: https://travis-ci.org/deluge/django-howl
 
-.. image:: https://coveralls.io/repos/deluge/django-pushify/badge.svg?branch=master
-  :target: https://coveralls.io/github/deluge/django-pushify?branch=master
+.. image:: https://coveralls.io/repos/deluge/django-howl/badge.svg?branch=master
+  :target: https://coveralls.io/github/deluge/django-howl?branch=master
 
 
-What is django-pushify
+What is django-howl
 -----------------------
 
-`pushify` is a Django app to provide notifications in several ways.
+`howl` is a Django app to provide notifications in several ways.

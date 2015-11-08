@@ -8,5 +8,5 @@ DATABASES = {
 }
 
 INSTALLED_APPS = (
-    'pushify',
+    'howl',
 )

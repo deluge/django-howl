@@ -3,5 +3,5 @@ include CHANGELOG.rst
 include LICENSE.rst
 include setup.cfg
 
-recursive-include pushify *.py
-recursive-exclude pushify/tests *
+recursive-include howl *.py
+recursive-exclude howl/tests *

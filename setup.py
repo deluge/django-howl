@@ -25,17 +25,17 @@ tests_require = [
 
 
 setup(
-    name='django-pushify',
+    name='django-howl',
     description='Django app to provide notifications in several ways',
     long_description=read('README.rst'),
     version=VERSION,
     license='BSD',
     author='Benjamin Banduhn, Stephan Jaekel',
     author_email='deluge@banduhn.com',
-    url='http://github.com/deluge/django-pushify/',
+    url='http://github.com/deluge/django-howl/',
     packages=find_packages(exclude=[
-        'pushify.tests',
-        'pushify.tests.factories',
+        'howl.tests',
+        'howl.tests.factories',
     ]),
     test_suite='.',
     tests_require=tests_require,
