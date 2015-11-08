@@ -1,0 +1,5 @@
+*.egg
+.tox
+coverage.xml
+.coverage
+.cache
