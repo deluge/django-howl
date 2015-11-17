@@ -41,7 +41,6 @@ setup(
     tests_require=tests_require,
     install_requires=[
         'Django>=1.8,<1.10',
-        'django-pgcrypto>=1.2.0',
     ],
     extras_require={
         'tests': tests_require,
