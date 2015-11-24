@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-24 22:51+0100\n"
+"POT-Creation-Date: 2015-11-24 23:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,3 +84,8 @@ msgstr "Alarm"
 #: models.py:42
 msgid "Alerts"
 msgstr "Alarme"
+
+#: models.py:46
+#, python-brace-format
+msgid "Alert (ID: {0}) for {1}"
+msgstr "Alarm (ID: {0}) für {1}"
