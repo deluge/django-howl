@@ -1,0 +1,86 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-24 22:51+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: comparators.py:17
+msgid "Equals to value"
+msgstr "Wert gleich"
+
+#: comparators.py:32
+msgid "Lower than value"
+msgstr "Wert kleiner als"
+
+#: comparators.py:46
+msgid "Greater than value"
+msgstr "Wert größer als"
+
+#: models.py:8
+msgid "Name"
+msgstr "Name"
+
+#: models.py:10
+msgid "Comparator type"
+msgstr "Komparator Type"
+
+#: models.py:11
+msgid "Value"
+msgstr "Wert"
+
+#: models.py:13
+msgid "Tolerance"
+msgstr "Abweichung"
+
+#: models.py:13
+msgid "In percent"
+msgstr "In Prozent"
+
+#: models.py:14
+msgid "Waiting period"
+msgstr "Wartezeit"
+
+#: models.py:14
+msgid "In seconds"
+msgstr "In Sekunden"
+
+#: models.py:17 models.py:36
+msgid "Observer"
+msgstr "Beobachter"
+
+#: models.py:18
+msgid "Observers"
+msgstr "Beobachter"
+
+#: models.py:32
+msgid "Waiting"
+msgstr "Wartend"
+
+#: models.py:33
+msgid "Notified"
+msgstr "Benachrichtigt"
+
+#: models.py:38
+msgid "State"
+msgstr "Status"
+
+#: models.py:41
+msgid "Alert"
+msgstr "Alarm"
+
+#: models.py:42
+msgid "Alerts"
+msgstr "Alarme"
