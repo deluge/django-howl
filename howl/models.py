@@ -43,4 +43,4 @@ class Alert(models.Model):
         ordering = ('-timestamp',)
 
     def __str__(self):
-        return 'Alert (ID: {0}) for {1}'.format(self.pk, self.observer.name)
+        return _('Alert (ID: {0}) for {1}').format(self.pk, self.observer.name)
