@@ -55,6 +55,6 @@ class GreaterThanComparator(BaseComparator):
         return float(compare_value) > min_tolerance
 
 
-COMPARATOR_CLASSES = (EqualComparator,)
+COMPARATOR_CLASSES = (EqualComparator, LowerThanComparator, GreaterThanComparator)
 COMPARATOR_CHOICES = [(cls.name, cls.display_name) for cls in COMPARATOR_CLASSES]
 COMPARATOR_MAPPING = dict([(cls.name, cls) for cls in COMPARATOR_CLASSES])
