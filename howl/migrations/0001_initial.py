@@ -13,29 +13,28 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Alert',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('timestamp', models.DateTimeField(auto_now_add=True)),
                 ('state', models.PositiveSmallIntegerField(default=0, verbose_name='State')),
             ],
             options={
-                'verbose_name': 'Alert',
                 'verbose_name_plural': 'Alerts',
+                'verbose_name': 'Alert',
                 'ordering': ('-timestamp',),
             },
         ),
         migrations.CreateModel(
             name='Observer',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('name', models.CharField(max_length=255, verbose_name='Name')),
-                ('comparator', models.CharField(max_length=32, verbose_name='Comparator type', choices=[('equal', 'Comparator that equals to value')])),
+                ('operator', models.CharField(max_length=32, verbose_name='Operator type', choices=[('equal', 'Equals to value'), ('greater', 'Greater than value'), ('lower', 'Lower than value')])),
                 ('value', models.PositiveIntegerField(verbose_name='Value')),
-                ('tolerance', models.PositiveSmallIntegerField(help_text='In percent', default=0, verbose_name='Tolerance')),
                 ('waiting_period', models.PositiveIntegerField(help_text='In seconds', verbose_name='Waiting period')),
             ],
             options={
-                'verbose_name': 'Observer',
                 'verbose_name_plural': 'Observers',
+                'verbose_name': 'Observer',
                 'ordering': ('name',),
             },
         ),

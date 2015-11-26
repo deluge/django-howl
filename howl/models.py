@@ -1,16 +1,14 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from . import comparators
+from .operators import get_operator_types
 
 
 class Observer(models.Model):
     name = models.CharField(_('Name'), max_length=255)
-    comparator = models.CharField(
-        _('Comparator type'), max_length=32, choices=comparators.COMPARATOR_CHOICES)
+    operator = models.CharField(
+        _('Operator type'), max_length=32, choices=get_operator_types())
     value = models.PositiveIntegerField(_('Value'))
-    tolerance = models.PositiveSmallIntegerField(
-        _('Tolerance'), default=0, help_text=_('In percent'))
     waiting_period = models.PositiveIntegerField(_('Waiting period'), help_text=_('In seconds'))
 
     class Meta:
@@ -21,9 +19,9 @@ class Observer(models.Model):
     def __str__(self):
         return self.name
 
-    def is_exceeded(self, compare_value):
-        comparator_class = comparators.COMPARATOR_MAPPING[self.comparator]
-        return comparator_class(self).value_is_exceeded(compare_value)
+    def compare(self, compare_value):
+        operator_class = self.operator
+        return operator_class(self).compare(compare_value)
 
 
 class Alert(models.Model):

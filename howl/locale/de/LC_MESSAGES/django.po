@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-24 23:43+0100\n"
+"POT-Creation-Date: 2015-11-26 21:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,75 +17,67 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: comparators.py:17
-msgid "Equals to value"
-msgstr "Wert gleich"
-
-#: comparators.py:32
-msgid "Lower than value"
-msgstr "Wert kleiner als"
-
-#: comparators.py:46
-msgid "Greater than value"
-msgstr "Wert größer als"
-
 #: models.py:8
 msgid "Name"
 msgstr "Name"
 
 #: models.py:10
-msgid "Comparator type"
-msgstr "Komparator Typ"
+msgid "Operator type"
+msgstr "Operator Typ"
 
 #: models.py:11
 msgid "Value"
 msgstr "Wert"
 
-#: models.py:13
-msgid "Tolerance"
-msgstr "Abweichung"
-
-#: models.py:13
-msgid "In percent"
-msgstr "In Prozent"
-
-#: models.py:14
+#: models.py:12
 msgid "Waiting period"
 msgstr "Wartezeit"
 
-#: models.py:14
+#: models.py:12
 msgid "In seconds"
 msgstr "In Sekunden"
 
-#: models.py:17 models.py:36
+#: models.py:15 models.py:30
 msgid "Observer"
 msgstr "Beobachter"
 
-#: models.py:18
+#: models.py:16
 msgid "Observers"
 msgstr "Beobachter"
 
-#: models.py:32
+#: models.py:26
 msgid "Waiting"
 msgstr "Wartend"
 
-#: models.py:33
+#: models.py:27
 msgid "Notified"
 msgstr "Benachrichtigt"
 
-#: models.py:38
+#: models.py:32
 msgid "State"
 msgstr "Status"
 
-#: models.py:41
+#: models.py:35
 msgid "Alert"
 msgstr "Alarm"
 
-#: models.py:42
+#: models.py:36
 msgid "Alerts"
 msgstr "Alarme"
 
-#: models.py:46
+#: models.py:40
 #, python-brace-format
 msgid "Alert (ID: {0}) for {1}"
 msgstr "Alarm (ID: {0}) für {1}"
+
+#: operators.py:43
+msgid "Equals to value"
+msgstr "Wert gleich"
+
+#: operators.py:60
+msgid "Lower than value"
+msgstr "Wert kleiner als"
+
+#: operators.py:76
+msgid "Greater than value"
+msgstr "Wert größer als"

@@ -1,22 +1,46 @@
 from django.utils.translation import ugettext_lazy as _
 
 
-class BaseComparator(object):
-    name = None
+def add_operator_type(operator_class):
+    # Fail silently if we try to double register operator classes.
+    if operator_class.__name__ in add_operator_type._REGISTRY:
+        return False
+
+    add_operator_type._REGISTRY[operator_class.__name__] = operator_class
+    return True
+
+add_operator_type._REGISTRY = {}
+
+
+def get_operator_types():
+    return sorted([
+        (operator_class.__name__, operator_class.display_name)
+        for operator_class in add_operator_type._REGISTRY.values()
+    ])
+
+
+class OperatorException(Exception):
+    pass
+
+
+class BaseOperator(object):
     display_name = None
+
+    @classmethod
+    def register(cls):
+        return add_operator_type(cls)
 
     def __init__(self, observer):
         self.observer = observer
 
-    def value_is_exceeded(self, compare_value):
-        raise NotImplementedError('Method value_is_exceeded is not implemented.')
+    def compare(self, compare_value):
+        raise NotImplementedError('Method compare is not implemented.')
 
 
-class EqualComparator(BaseComparator):
-    name = 'equal'
+class EqualOperator(BaseOperator):
     display_name = _('Equals to value')
 
-    def value_is_exceeded(self, compare_value):
+    def compare(self, compare_value):
         if self.observer.tolerance == 0:
             return self.observer.value == compare_value
 
@@ -26,12 +50,13 @@ class EqualComparator(BaseComparator):
 
         return min_tolerance <= float(compare_value) and max_tolerance >= float(compare_value)
 
+EqualOperator.register()
 
-class LowerThanComparator(BaseComparator):
-    name = 'lower'
+
+class LowerThanOperator(BaseOperator):
     display_name = _('Lower than value')
 
-    def value_is_exceeded(self, compare_value):
+    def compare(self, compare_value):
         if self.observer.tolerance == 0:
             return self.observer.value < compare_value
 
@@ -40,12 +65,13 @@ class LowerThanComparator(BaseComparator):
 
         return float(compare_value) < max_tolerance
 
+LowerThanOperator.register()
 
-class GreaterThanComparator(BaseComparator):
-    name = 'greater'
+
+class GreaterThanOperator(BaseOperator):
     display_name = _('Greater than value')
 
-    def value_is_exceeded(self, compare_value):
+    def compare(self, compare_value):
         if self.observer.tolerance == 0:
             return self.observer.value < compare_value
 
@@ -54,7 +80,4 @@ class GreaterThanComparator(BaseComparator):
 
         return float(compare_value) > min_tolerance
 
-
-COMPARATOR_CLASSES = (EqualComparator, LowerThanComparator, GreaterThanComparator)
-COMPARATOR_CHOICES = [(cls.name, cls.display_name) for cls in COMPARATOR_CLASSES]
-COMPARATOR_MAPPING = dict([(cls.name, cls) for cls in COMPARATOR_CLASSES])
+GreaterThanOperator.register()

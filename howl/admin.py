@@ -5,4 +5,4 @@ from .models import Observer
 
 @admin.register(Observer)
 class ObserverAdmin(admin.ModelAdmin):
-    list_display = ('name', 'comparator', 'value')
+    list_display = ('name', 'operator', 'value')
