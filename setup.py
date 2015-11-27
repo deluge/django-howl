@@ -14,6 +14,7 @@ def read(*parts):
 
 tests_require = [
     'coverage',
+    'mock',
     'pytest',
     'pytest-cov',
     'pytest-pep8',

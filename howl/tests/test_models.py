@@ -1,6 +1,6 @@
 import pytest
 
-from .factories.observers import AlertFactory, ObserverFactory
+from howl.tests.factories.observers import AlertFactory, ObserverFactory
 
 
 @pytest.mark.django_db
