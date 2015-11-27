@@ -19,6 +19,15 @@ def get_operator_types():
     ])
 
 
+def get_operator_class(class_name):
+    cls = add_operator_type._REGISTRY.get(class_name, None)
+
+    if cls:
+        return cls
+
+    raise KeyError('Key "{0}" not in operator registry'.format(class_name))
+
+
 class OperatorException(Exception):
     pass
 
@@ -41,14 +50,7 @@ class EqualOperator(BaseOperator):
     display_name = _('Equals to value')
 
     def compare(self, compare_value):
-        if self.observer.tolerance == 0:
-            return self.observer.value == compare_value
-
-        factor = self.observer.value * self.observer.tolerance / 100.0
-        min_tolerance = float(self.observer.value - factor)
-        max_tolerance = float(self.observer.value + factor)
-
-        return min_tolerance <= float(compare_value) and max_tolerance >= float(compare_value)
+        return self.observer.value == compare_value
 
 EqualOperator.register()
 
@@ -57,13 +59,7 @@ class LowerThanOperator(BaseOperator):
     display_name = _('Lower than value')
 
     def compare(self, compare_value):
-        if self.observer.tolerance == 0:
-            return self.observer.value < compare_value
-
-        factor = self.observer.value * self.observer.tolerance / 100.0
-        max_tolerance = float(self.observer.value + factor)
-
-        return float(compare_value) < max_tolerance
+        return compare_value < self.observer.value
 
 LowerThanOperator.register()
 
@@ -72,12 +68,6 @@ class GreaterThanOperator(BaseOperator):
     display_name = _('Greater than value')
 
     def compare(self, compare_value):
-        if self.observer.tolerance == 0:
-            return self.observer.value < compare_value
-
-        factor = self.observer.value * self.observer.tolerance / 100.0
-        min_tolerance = float(self.observer.value - factor)
-
-        return float(compare_value) > min_tolerance
+        return compare_value > self.observer.value
 
 GreaterThanOperator.register()

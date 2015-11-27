@@ -11,14 +11,14 @@ class TestObserverModel:
 
         assert str(obj) == 'test observer'
 
-    # @pytest.mark.parametrize('value, compare_value, return_value', [
-    #     (49, 50, False),
-    #     (50, 50, True),
-    #     (51, 50, False),
-    # ])
-    # def test_is_exceeded(self, value, compare_value, return_value):
-    #     obj = ObserverFactory.create(value=compare_value)
-    #     obj.compare(value) is return_value
+    @pytest.mark.parametrize('value, compare_value, return_value', [
+        (49, 50, False),
+        (50, 50, True),
+        (51, 50, False),
+    ])
+    def test_is_exceeded(self, value, compare_value, return_value):
+        obj = ObserverFactory.create(value=compare_value)
+        obj.compare(value) is return_value
 
 
 @pytest.mark.django_db

@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from .operators import get_operator_types
+from .operators import get_operator_class, get_operator_types
 
 
 class Observer(models.Model):
@@ -20,7 +20,7 @@ class Observer(models.Model):
         return self.name
 
     def compare(self, compare_value):
-        operator_class = self.operator
+        operator_class = get_operator_class(self.operator)
         return operator_class(self).compare(compare_value)
 
 
