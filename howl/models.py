@@ -23,6 +23,13 @@ class Observer(models.Model):
         operator_class = get_operator_class(self.operator)
         return operator_class(self).compare(compare_value)
 
+    def check_and_alert(self, compare_value):
+        if self.compare(compare_value):
+            return False
+
+        self.alert_set.create()
+        return True
+
 
 class Alert(models.Model):
     STATE_WAITING, STATE_NOTIFIED = range(0, 2)
@@ -33,7 +40,8 @@ class Alert(models.Model):
 
     observer = models.ForeignKey(Observer, verbose_name=_('Observer'))
     timestamp = models.DateTimeField(auto_now_add=True)
-    state = models.PositiveSmallIntegerField(_('State'), default=STATE_WAITING)
+    state = models.PositiveSmallIntegerField(
+        _('State'), choices=STATE_CHOICES, default=STATE_WAITING)
 
     class Meta:
         verbose_name = _('Alert')
