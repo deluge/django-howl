@@ -22,10 +22,10 @@ def get_operator_types():
 def get_operator_class(class_name):
     cls = add_operator_type._REGISTRY.get(class_name, None)
 
-    if cls:
-        return cls
+    if not cls:
+        raise KeyError('Key "{0}" not in operator registry'.format(class_name))
 
-    raise KeyError('Key "{0}" not in operator registry'.format(class_name))
+    return cls
 
 
 class OperatorException(Exception):
