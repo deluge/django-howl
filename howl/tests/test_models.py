@@ -1,3 +1,5 @@
+import time
+
 import pytest
 
 from howl.models import Alert
@@ -23,6 +25,32 @@ class TestObserverModel:
         assert Alert.objects.all().count() == 0
         assert obj.alert(compare_value) is return_value
         assert Alert.objects.all().count() == count_objects
+
+    def test_alert_delete(self):
+        obj = ObserverFactory.create(value=4)
+        obj.alert(3)
+        assert Alert.objects.all().count() == 1
+        time.sleep(1)
+        obj.alert(4)
+        assert Alert.objects.all().count() == 0
+
+    def test_alert_critical(self):
+        obj = ObserverFactory.create(value=4)
+        obj.alert(3)
+        assert Alert.objects.all().count() == 1
+        time.sleep(1)
+        obj.alert(3)
+        assert Alert.objects.all().count() == 1
+        assert Alert.objects.first().state == Alert.STATE_NOTIFIED
+
+    def test_alert_waiting_priod_not_achieved(self):
+        obj = ObserverFactory.create(value=4, waiting_period=5)
+        obj.alert(3)
+        assert Alert.objects.all().count() == 1
+        time.sleep(1)
+        obj.alert(3)
+        assert Alert.objects.all().count() == 1
+        assert Alert.objects.first().state == Alert.STATE_WAITING
 
 
 @pytest.mark.django_db

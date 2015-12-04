@@ -1,7 +1,10 @@
+from datetime import datetime, timedelta
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from .operators import get_operator_class, get_operator_types
+from .signals import howl_alert_critical, howl_alert_delete, howl_alert_warn
 
 
 class Observer(models.Model):
@@ -21,10 +24,26 @@ class Observer(models.Model):
 
     def alert(self, compare_value):
         operator_class = get_operator_class(self.operator)
+
         if operator_class(self).compare(compare_value):
+            if Alert.objects.filter(observer=self).exists():
+                alert = Alert.objects.get(observer=self)
+                howl_alert_delete.send(sender=self.__class__, instance=alert)
+                alert.delete()
+
             return False
 
-        self.alert_set.create()
+        obj, created = Alert.objects.get_or_create(observer=self, defaults={'observer': self})
+
+        if created:
+            howl_alert_warn.send(sender=self.__class__, instance=obj)
+        else:
+            alert_time = obj.timestamp + timedelta(seconds=self.waiting_period)
+            if alert_time < datetime.now():
+                obj.state = obj.STATE_NOTIFIED
+                obj.save()
+                howl_alert_critical.send(sender=self.__class__, instance=obj)
+
         return True
 
 
