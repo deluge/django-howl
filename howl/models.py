@@ -19,12 +19,9 @@ class Observer(models.Model):
     def __str__(self):
         return self.name
 
-    def compare(self, compare_value):
+    def alert(self, compare_value):
         operator_class = get_operator_class(self.operator)
-        return operator_class(self).compare(compare_value)
-
-    def check_and_alert(self, compare_value):
-        if self.compare(compare_value):
+        if operator_class(self).compare(compare_value):
             return False
 
         self.alert_set.create()
