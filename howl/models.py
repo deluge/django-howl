@@ -13,6 +13,7 @@ class Observer(models.Model):
         _('Operator type'), max_length=32, choices=get_operator_types())
     value = models.PositiveIntegerField(_('Value'))
     waiting_period = models.PositiveIntegerField(_('Waiting period'), help_text=_('In seconds'))
+    alert_every_time = models.BooleanField(_('Alert every time'), default=False)
 
     class Meta:
         verbose_name = _('Observer')
@@ -40,9 +41,12 @@ class Observer(models.Model):
         else:
             alert_time = obj.timestamp + timedelta(seconds=self.waiting_period)
             if alert_time < datetime.now():
-                obj.state = obj.STATE_NOTIFIED
-                obj.save()
-                howl_alert_critical.send(sender=self.__class__, instance=obj)
+                if not obj.state == obj.STATE_NOTIFIED:
+                    obj.state = obj.STATE_NOTIFIED
+                    obj.save()
+
+                if self.alert_every_time:
+                    howl_alert_critical.send(sender=self.__class__, instance=obj)
 
         return True
 
