@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-26 21:00+0100\n"
+"POT-Creation-Date: 2015-12-05 21:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,67 +17,71 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: models.py:8
-msgid "Name"
-msgstr "Name"
-
-#: models.py:10
-msgid "Operator type"
-msgstr "Operator Typ"
-
-#: models.py:11
-msgid "Value"
-msgstr "Wert"
-
-#: models.py:12
-msgid "Waiting period"
-msgstr "Wartezeit"
-
-#: models.py:12
-msgid "In seconds"
-msgstr "In Sekunden"
-
-#: models.py:15 models.py:30
+#: howl/admin.py:20 howl/models.py:19 howl/models.py:61
 msgid "Observer"
 msgstr "Beobachter"
 
-#: models.py:16
+#: howl/models.py:11
+msgid "Name"
+msgstr "Name"
+
+#: howl/models.py:13
+msgid "Operator type"
+msgstr "Operator Typ"
+
+#: howl/models.py:14
+msgid "Value"
+msgstr "Wert"
+
+#: howl/models.py:15
+msgid "Waiting period"
+msgstr "Wartezeit"
+
+#: howl/models.py:15
+msgid "In seconds"
+msgstr "In Sekunden"
+
+#: howl/models.py:16
+msgid "Alert every time"
+msgstr "Jedes mal alarmieren"
+
+#: howl/models.py:20
 msgid "Observers"
 msgstr "Beobachter"
 
-#: models.py:26
+#: howl/models.py:57
 msgid "Waiting"
 msgstr "Wartend"
 
-#: models.py:27
+#: howl/models.py:58
 msgid "Notified"
 msgstr "Benachrichtigt"
 
-#: models.py:32
+#: howl/models.py:64
 msgid "State"
 msgstr "Status"
 
-#: models.py:35
+#: howl/models.py:67
 msgid "Alert"
 msgstr "Alarm"
 
-#: models.py:36
+#: howl/models.py:68
 msgid "Alerts"
 msgstr "Alarme"
 
-#: models.py:40
+#: howl/models.py:72
 #, python-brace-format
 msgid "Alert (ID: {0}) for {1}"
 msgstr "Alarm (ID: {0}) für {1}"
 
-#: operators.py:43
+#: howl/operators.py:50
 msgid "Equals to value"
 msgstr "Wert gleich"
 
-#: operators.py:60
+#: howl/operators.py:59
 msgid "Lower than value"
 msgstr "Wert kleiner als"
 
-#: operators.py:76
+#: howl/operators.py:68
 msgid "Greater than value"
 msgstr "Wert größer als"
