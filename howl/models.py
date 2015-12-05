@@ -41,11 +41,12 @@ class Observer(models.Model):
         else:
             alert_time = obj.timestamp + timedelta(seconds=self.waiting_period)
             if alert_time < datetime.now():
-                if not obj.state == obj.STATE_NOTIFIED:
+                if obj.state == obj.STATE_NOTIFIED and self.alert_every_time:
+                    howl_alert_critical.send(sender=self.__class__, instance=obj)
+
+                if obj.state == obj.STATE_WAITING:
                     obj.state = obj.STATE_NOTIFIED
                     obj.save()
-
-                if self.alert_every_time:
                     howl_alert_critical.send(sender=self.__class__, instance=obj)
 
         return True
