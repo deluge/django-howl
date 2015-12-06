@@ -1,5 +1,7 @@
 *.egg-info/
 *.egg
+build/
+dist/
 .tox
 coverage.xml
 .coverage
