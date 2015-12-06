@@ -22,8 +22,21 @@ coverage-html:
 	py.test ${OPTS} --cov=$(COV) --cov-report=term-missing --cov-report=html $(APP)
 
 
-clean:
-	rm -fr build/ src/build
-	rm -fr dist/ src/dist
-	rm -fr *.egg-info src/*.egg-info
-	rm -fr htmlcov/
+devinstall:
+	pip install -e .
+	pip install -e .[tests]
+	pip install -e .[docs]
+
+docs: clean-build
+	pip install -e .
+	pip install -e [docs]
+	sphinx-apidoc --force -o docs/source/modules/ howl howl/tests/
+	$(MAKE) -C docs clean
+	$(MAKE) -C docs html
+
+clean-build:
+	@rm -fr build/
+	@rm -fr dist/
+	@rm -fr *.egg-info src/*.egg-info
+	@rm -fr htmlcov/
+	$(MAKE) -C docs clean
