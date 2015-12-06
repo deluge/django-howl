@@ -35,6 +35,12 @@ tests_require = [
 ]
 
 
+docs_requires = [
+    'sphinx',
+    'sphinx_rtd_theme'
+]
+
+
 setup(
     name='django-howl',
     description='Django app to provide notifications in several ways',
@@ -54,6 +60,7 @@ setup(
         'Django>=1.8,<1.10',
     ],
     extras_require={
+        'docs': docs_requires,
         'tests': tests_require,
     },
     classifiers=[
