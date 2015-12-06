@@ -1,9 +1,19 @@
 import os
+import sys
 
 from setuptools import find_packages, setup
 
 
-VERSION = '0.1.0'
+version = '0.1.0'
+
+
+if sys.argv[-1] == 'publish':
+    os.system('python setup.py sdist upload')
+    os.system('python setup.py bdist_wheel upload')
+    print('You probably want to also tag the version now:')
+    print('  git tag -a %s -m "version %s"' % (version, version))
+    print('  git push --tags')
+    sys.exit()
 
 
 def read(*parts):
@@ -29,7 +39,7 @@ setup(
     name='django-howl',
     description='Django app to provide notifications in several ways',
     long_description=read('README.rst'),
-    version=VERSION,
+    version=version,
     license='BSD',
     author='Benjamin Banduhn, Stephan Jaekel',
     author_email='deluge@banduhn.com',
