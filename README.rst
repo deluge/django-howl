@@ -15,3 +15,40 @@ What is django-howl
 -----------------------
 
 `howl` is a Django app to provide notifications in several ways.
+
+You can connect to the signals and do everything you want
+like sending notifications over different APIs.
+
+
+Installation
+============
+
+* Install ``django-howl`` (or `download from PyPI <http://pypi.python.org/pypi/django-howl>`_):
+
+.. code-block:: python
+
+    pip install django-howl
+
+* After Installation add it to ``INSTALLED_APPS`` in ``settings.py``:
+
+.. code-block:: python
+
+    INSTALLED_APPS = (
+        # other apps
+        'howl',
+    )
+
+
+Usage
+=====
+
+Now you can login to the admin and configure some observers and build some nice apps
+with it.
+
+
+Resources
+=========
+
+* `Documentation <https://django-howl.readthedocs.org/>`_
+* `Bug Tracker <https://github.com/deluge/django-howl/issues>`_
+* `Code <https://github.com/deluge/django-howl/>`_
