@@ -10,6 +10,10 @@ django-howl
 .. image:: https://coveralls.io/repos/deluge/django-howl/badge.svg?branch=master
   :target: https://coveralls.io/github/deluge/django-howl?branch=master
 
+.. image:: https://readthedocs.org/projects/django-howl/badge/?version=latest
+  :target: http://django-howl.readthedocs.org/en/latest/?badge=latest
+  :alt: Documentation Status
+
 
 What is django-howl
 -----------------------
