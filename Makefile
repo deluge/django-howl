@@ -1,4 +1,4 @@
-.PHONY: tests coverage coverage-html clean
+.PHONY: tests coverage coverage-html devinstall docs clean
 APP=.
 COV=howl
 OPTS=-vs
@@ -7,6 +7,8 @@ help:
 	@echo "tests - run tests"
 	@echo "coverage - run tests with coverage enabled"
 	@echo "coverage-html - run tests with coverage html export enabled"
+	@echo "devinstall - install all packages required for development"
+	@echo "docs - generate Sphinx HTML documentation, including API docs"
 	@echo "clean - Clean build related files"
 
 
@@ -27,16 +29,12 @@ devinstall:
 	pip install -e .[tests]
 	pip install -e .[docs]
 
-docs: clean-build
-	pip install -e .
-	pip install -e [docs]
-	sphinx-apidoc --force -o docs/source/modules/ howl howl/tests/
-	$(MAKE) -C docs clean
+docs: clean
 	$(MAKE) -C docs html
 
-clean-build:
-	@rm -fr build/
-	@rm -fr dist/
-	@rm -fr *.egg-info src/*.egg-info
-	@rm -fr htmlcov/
+clean:
+	rm -fr build/
+	rm -fr dist/
+	rm -fr *.egg-info
+	rm -fr htmlcov/
 	$(MAKE) -C docs clean
