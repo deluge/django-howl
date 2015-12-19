@@ -14,9 +14,9 @@ class TestObserverModel:
         assert str(obj) == 'test observer'
 
     @pytest.mark.parametrize('value, compare_value, return_value, count_objects', [
-        (49, 50, True, 1),
-        (50, 50, False, 0),
-        (51, 50, True, 1),
+        (49, 50, False, 1),
+        (50, 50, True, 0),
+        (51, 50, False, 1),
     ])
     def test_compare(self, value, compare_value, return_value, count_objects):
         obj = ObserverFactory.create(value=value)

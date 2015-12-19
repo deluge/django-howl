@@ -19,7 +19,7 @@ class TestAlertAdmin:
 
     def test_list_display(self, rf):
         modeladmin = AlertAdmin(Alert, admin.site)
-        assert modeladmin.list_display == ('get_observer_name', 'timestamp', 'state')
+        assert modeladmin.list_display == ('get_observer_name', 'timestamp', 'value', 'state')
 
     def test_get_observer_name(self, rf):
         observer = ObserverFactory.create()

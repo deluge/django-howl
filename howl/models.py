@@ -1,6 +1,7 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from .operators import get_operator_class, get_operator_types
@@ -28,10 +29,10 @@ class Observer(models.Model):
 
         if operator_class(self).compare(compare_value):
             Alert.clear(self)
-            return False
+            return True
 
         Alert.set(self, compare_value)
-        return True
+        return False
 
 
 class Alert(models.Model):
@@ -66,7 +67,7 @@ class Alert(models.Model):
 
         alert_time = obj.timestamp + timedelta(seconds=observer.waiting_period)
 
-        if alert_time < datetime.now():
+        if alert_time < timezone.now():
             if obj.state == obj.STATE_NOTIFIED and observer.alert_every_time:
                 obj.value = compare_value
                 obj.save(update_fields=['value'])

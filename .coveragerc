@@ -1,6 +1,5 @@
 [run]
 branch = True
 omit =
-    */__init__.py
-    howl/migrations/*
-    howl/tests/*
+	*/__init__.py
+	*migrations*
