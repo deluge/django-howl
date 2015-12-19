@@ -11,7 +11,7 @@ class ObserverAdmin(admin.ModelAdmin):
 
 @admin.register(Alert)
 class AlertAdmin(admin.ModelAdmin):
-    list_display = ('get_observer_name', 'timestamp', 'state')
+    list_display = ('get_observer_name', 'timestamp', 'value', 'state')
     list_filter = ('state',)
 
     def get_observer_name(self, obj):
