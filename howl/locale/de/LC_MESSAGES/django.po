@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-05 21:15+0100\n"
+"POT-Creation-Date: 2015-12-31 21:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,71 +17,75 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: howl/admin.py:20 howl/models.py:19 howl/models.py:61
+#: admin.py:20 models.py:20 models.py:45
 msgid "Observer"
 msgstr "Beobachter"
 
-#: howl/models.py:11
+#: apps.py:9
+msgid "Howl"
+msgstr "Howl"
+
+#: models.py:12
 msgid "Name"
 msgstr "Name"
 
-#: howl/models.py:13
+#: models.py:14
 msgid "Operator type"
 msgstr "Operator Typ"
 
-#: howl/models.py:14
+#: models.py:15 models.py:47
 msgid "Value"
 msgstr "Wert"
 
-#: howl/models.py:15
+#: models.py:16
 msgid "Waiting period"
 msgstr "Wartezeit"
 
-#: howl/models.py:15
+#: models.py:16
 msgid "In seconds"
 msgstr "In Sekunden"
 
-#: howl/models.py:16
+#: models.py:17
 msgid "Alert every time"
 msgstr "Jedes mal alarmieren"
 
-#: howl/models.py:20
+#: models.py:21
 msgid "Observers"
 msgstr "Beobachter"
 
-#: howl/models.py:57
+#: models.py:41
 msgid "Waiting"
 msgstr "Wartend"
 
-#: howl/models.py:58
+#: models.py:42
 msgid "Notified"
 msgstr "Benachrichtigt"
 
-#: howl/models.py:64
+#: models.py:49
 msgid "State"
 msgstr "Status"
 
-#: howl/models.py:67
+#: models.py:52
 msgid "Alert"
 msgstr "Alarm"
 
-#: howl/models.py:68
+#: models.py:53
 msgid "Alerts"
 msgstr "Alarme"
 
-#: howl/models.py:72
+#: models.py:57
 #, python-brace-format
 msgid "Alert (ID: {0}) for {1}"
 msgstr "Alarm (ID: {0}) für {1}"
 
-#: howl/operators.py:50
+#: operators.py:50
 msgid "Equals to value"
 msgstr "Wert gleich"
 
-#: howl/operators.py:59
+#: operators.py:59
 msgid "Lower than value"
 msgstr "Wert kleiner als"
 
-#: howl/operators.py:68
+#: operators.py:68
 msgid "Greater than value"
 msgstr "Wert größer als"
