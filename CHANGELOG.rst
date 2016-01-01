@@ -1,7 +1,13 @@
 Changelog
 =========
 
-0.1.2 - 2015-12-31
+0.1.4 - 2016-01-01
+------------------
+
+* adjust setup file
+
+
+0.1.3 - 2015-12-31
 ------------------
 
 * adjust setup files and add apps.py

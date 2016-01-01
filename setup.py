@@ -4,7 +4,7 @@ import sys
 from setuptools import find_packages, setup
 
 
-version = '0.1.3'
+version = '0.1.4'
 
 
 if sys.argv[-1] == 'publish':
@@ -53,6 +53,8 @@ setup(
     packages=find_packages(exclude=[
         'howl.tests',
         'howl.tests.factories',
+        'examples',
+        'build',
     ]),
     test_suite='.',
     tests_require=tests_require,
