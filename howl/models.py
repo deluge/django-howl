@@ -24,15 +24,17 @@ class Observer(models.Model):
     def __str__(self):
         return self.name
 
-    def compare(self, compare_value):
+    def get_alert(self, compare_value, **kwargs):
         operator_class = get_operator_class(self.operator)
 
         if operator_class(self).compare(compare_value):
-            Alert.clear(self)
-            return True
+            Alert.clear(self, compare_value, **kwargs)
+            return None
 
-        Alert.set(self, compare_value)
-        return False
+        return Alert.set(self, compare_value, **kwargs)
+
+    def compare(self, compare_value, **kwargs):
+        return self.get_alert(compare_value, **kwargs) is None
 
 
 class Alert(models.Model):
@@ -57,13 +59,13 @@ class Alert(models.Model):
         return _('Alert (ID: {0}) for {1}').format(self.pk, self.observer.name)
 
     @classmethod
-    def set(cls, observer, compare_value):
+    def set(cls, observer, compare_value, **kwargs):
         obj, created = Alert.objects.get_or_create(
             observer=observer, defaults={'value': compare_value})
 
         if created:
-            alert_wait.send(sender=cls, instance=obj)
-            return True
+            alert_wait.send(sender=cls, instance=obj, compare_value=compare_value, **kwargs)
+            return obj
 
         alert_time = obj.timestamp + timedelta(seconds=observer.waiting_period)
 
@@ -71,19 +73,23 @@ class Alert(models.Model):
             if obj.state == obj.STATE_NOTIFIED and observer.alert_every_time:
                 obj.value = compare_value
                 obj.save(update_fields=['value'])
-                alert_notify.send(sender=cls, instance=obj)
+                alert_notify.send(
+                    sender=cls, instance=obj, compare_value=compare_value, **kwargs)
 
             if obj.state == obj.STATE_WAITING:
                 obj.value = compare_value
                 obj.state = obj.STATE_NOTIFIED
                 obj.save(update_fields=['value', 'state'])
-                alert_notify.send(sender=cls, instance=obj)
+                alert_notify.send(
+                    sender=cls, instance=obj, compare_value=compare_value, **kwargs)
+
+        return obj
 
     @classmethod
-    def clear(cls, observer):
+    def clear(cls, observer, compare_value, **kwargs):
         try:
             obj = Alert.objects.get(observer=observer)
-            alert_clear.send(sender=cls, instance=obj)
+            alert_clear.send(sender=cls, instance=obj, compare_value=compare_value, **kwargs)
             obj.delete()
         except Alert.DoesNotExist:
             pass

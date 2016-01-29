@@ -13,6 +13,21 @@ class TestObserverModel:
 
         assert str(obj) == 'test observer'
 
+    @pytest.mark.parametrize('value, compare_value, count_objects', [
+        (49, 50, 1),
+        (50, 50, 0),
+        (51, 50, 1),
+    ])
+    def test_get_alert(self, value, compare_value, count_objects):
+        obj = ObserverFactory.create(value=value)
+
+        assert Alert.objects.all().count() == 0
+        alert = obj.get_alert(compare_value)
+        assert Alert.objects.all().count() == count_objects
+
+        if alert:
+            assert alert == Alert.objects.first()
+
     @pytest.mark.parametrize('value, compare_value, return_value, count_objects', [
         (49, 50, False, 1),
         (50, 50, True, 0),
@@ -94,7 +109,7 @@ class TestAlertModel:
     def test_clear(self, mock):
         observer = ObserverFactory.create()
         AlertFactory.create(observer=observer)
-        Alert.clear(observer)
+        Alert.clear(observer, observer.value)
 
         assert Alert.objects.all().count() == 0
         assert mock.call_count == 1
@@ -102,7 +117,7 @@ class TestAlertModel:
     @mock.patch('howl.models.alert_clear.send')
     def test_clear_no_object(self, mock):
         observer = ObserverFactory.create()
-        Alert.clear(observer)
+        Alert.clear(observer, observer.value)
 
         assert Alert.objects.all().count() == 0
         assert mock.call_count == 0
