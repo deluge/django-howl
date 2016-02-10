@@ -16,7 +16,7 @@ class ObserverFactory(factory.DjangoModelFactory):
 
 
 class AlertFactory(factory.DjangoModelFactory):
-    observer = factory.SubFactory(ObserverFactory)
+    identifier = factory.Sequence(lambda i: 'alert-{0}')
     value = FuzzyChoice(range(1, 10))
 
     class Meta:

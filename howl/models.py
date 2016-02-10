@@ -12,8 +12,9 @@ class Observer(models.Model):
     name = models.CharField(_('Name'), max_length=255)
     operator = models.CharField(
         _('Operator type'), max_length=32, choices=get_operator_types())
-    value = models.PositiveIntegerField(_('Value'))
-    waiting_period = models.PositiveIntegerField(_('Waiting period'), help_text=_('In seconds'))
+    value = models.IntegerField(_('Value'))
+    waiting_period = models.PositiveIntegerField(
+        _('Waiting period'), help_text=_('In seconds'))
     alert_every_time = models.BooleanField(_('Alert every time'), default=False)
 
     class Meta:
@@ -24,14 +25,17 @@ class Observer(models.Model):
     def __str__(self):
         return self.name
 
+    def get_alert_identifier(self):
+        return 'howl-observer:{0}'.format(self.pk)
+
     def get_alert(self, compare_value, **kwargs):
         operator_class = get_operator_class(self.operator)
 
         if operator_class(self).compare(compare_value):
-            Alert.clear(self, compare_value, **kwargs)
+            Alert.clear(compare_value, observer=self, **kwargs)
             return None
 
-        return Alert.set(self, compare_value, **kwargs)
+        return Alert.set(compare_value, observer=self, **kwargs)
 
     def compare(self, compare_value, **kwargs):
         return self.get_alert(compare_value, **kwargs) is None
@@ -43,10 +47,9 @@ class Alert(models.Model):
         (STATE_WAITING, _('Waiting')),
         (STATE_NOTIFIED, _('Notified')),
     )
-
-    observer = models.ForeignKey(Observer, verbose_name=_('Observer'))
+    identifier = models.CharField(_('Identifier'), max_length=64, unique=True)
     timestamp = models.DateTimeField(auto_now_add=True)
-    value = models.CharField(_('Value'), max_length=255)
+    value = models.CharField(_('Value'), max_length=255, blank=True, null=True)
     state = models.PositiveSmallIntegerField(
         _('State'), choices=STATE_CHOICES, default=STATE_WAITING)
 
@@ -56,40 +59,56 @@ class Alert(models.Model):
         ordering = ('-timestamp',)
 
     def __str__(self):
-        return _('Alert (ID: {0}) for {1}').format(self.pk, self.observer.name)
+        return _('Alert for {0}').format(self.identifier)
 
     @classmethod
-    def set(cls, observer, compare_value, **kwargs):
-        obj, created = Alert.objects.get_or_create(
-            observer=observer, defaults={'value': compare_value})
+    def set(cls, value=None, **kwargs):
+        if 'observer' in kwargs:
+            identifier = kwargs['observer'].get_alert_identifier()
+            waiting_period = kwargs['observer'].waiting_period
+            alert_every_time = kwargs['observer'].alert_every_time
+        else:
+            if 'identifier' not in kwargs:
+                raise ValueError('`observer` or `identifier` required.')
+            identifier = kwargs['identifier']
+            waiting_period = kwargs.get('waiting_period', 0)
+            alert_every_time = kwargs.get('alert_every_time', False)
 
-        if created:
-            alert_wait.send(sender=cls, instance=obj, compare_value=compare_value, **kwargs)
+        obj, created = Alert.objects.get_or_create(
+            identifier=identifier, defaults={'value': value})
+
+        if created and waiting_period > 0:
+            alert_wait.send(sender=cls, instance=obj, value=value, **kwargs)
             return obj
 
-        alert_time = obj.timestamp + timedelta(seconds=observer.waiting_period)
+        alert_time = obj.timestamp + timedelta(seconds=waiting_period)
 
         if alert_time < timezone.now():
-            if obj.state == obj.STATE_NOTIFIED and observer.alert_every_time:
-                obj.value = compare_value
+            if obj.state == obj.STATE_NOTIFIED and alert_every_time:
+                obj.value = value
                 obj.save(update_fields=['value'])
-                alert_notify.send(
-                    sender=cls, instance=obj, compare_value=compare_value, **kwargs)
+                alert_notify.send(sender=cls, instance=obj, value=value, **kwargs)
 
             if obj.state == obj.STATE_WAITING:
-                obj.value = compare_value
+                obj.value = value
                 obj.state = obj.STATE_NOTIFIED
                 obj.save(update_fields=['value', 'state'])
-                alert_notify.send(
-                    sender=cls, instance=obj, compare_value=compare_value, **kwargs)
+                alert_notify.send(sender=cls, instance=obj, value=value, **kwargs)
 
         return obj
 
     @classmethod
-    def clear(cls, observer, compare_value, **kwargs):
+    def clear(cls, value=None, **kwargs):
+        if 'observer' in kwargs:
+            identifier = kwargs['observer'].get_alert_identifier()
+        else:
+            if 'identifier' not in kwargs:
+                raise ValueError('`observer` or `identifier` required.')
+            identifier = kwargs['identifier']
+
         try:
-            obj = Alert.objects.get(observer=observer)
-            alert_clear.send(sender=cls, instance=obj, compare_value=compare_value, **kwargs)
+            obj = Alert.objects.get(identifier=identifier)
+            alert_clear.send(sender=cls, instance=obj, value=value, **kwargs)
             obj.delete()
         except Alert.DoesNotExist:
             pass
