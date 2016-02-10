@@ -47,7 +47,7 @@ class BaseOperator(object):
 
 
 class EqualOperator(BaseOperator):
-    display_name = _('Equals to value')
+    display_name = _('Equals')
 
     def compare(self, compare_value):
         return self.observer.value == compare_value
@@ -56,7 +56,7 @@ EqualOperator.register()
 
 
 class LowerThanOperator(BaseOperator):
-    display_name = _('Lower than value')
+    display_name = _('Lower than')
 
     def compare(self, compare_value):
         return compare_value < self.observer.value
@@ -65,7 +65,7 @@ LowerThanOperator.register()
 
 
 class GreaterThanOperator(BaseOperator):
-    display_name = _('Greater than value')
+    display_name = _('Greater than')
 
     def compare(self, compare_value):
         return compare_value > self.observer.value
