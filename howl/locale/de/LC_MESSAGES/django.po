@@ -5,23 +5,24 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-31 21:42+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2016-02-10 08:14+0100\n"
+"PO-Revision-Date: 2016-02-10 08:14+0100\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.6\n"
 
-#: admin.py:20 models.py:20 models.py:45
+#: admin.py:20 models.py:20 models.py:47
 msgid "Observer"
 msgstr "Beobachter"
 
-#: apps.py:9
+#: apps.py:7
 msgid "Howl"
 msgstr "Howl"
 
@@ -33,7 +34,7 @@ msgstr "Name"
 msgid "Operator type"
 msgstr "Operator Typ"
 
-#: models.py:15 models.py:47
+#: models.py:15 models.py:49
 msgid "Value"
 msgstr "Wert"
 
@@ -53,39 +54,42 @@ msgstr "Jedes mal alarmieren"
 msgid "Observers"
 msgstr "Beobachter"
 
-#: models.py:41
+#: models.py:43
 msgid "Waiting"
 msgstr "Wartend"
 
-#: models.py:42
+#: models.py:44
 msgid "Notified"
 msgstr "Benachrichtigt"
 
-#: models.py:49
+#: models.py:51
 msgid "State"
 msgstr "Status"
 
-#: models.py:52
+#: models.py:54
 msgid "Alert"
 msgstr "Alarm"
 
-#: models.py:53
+#: models.py:55
 msgid "Alerts"
 msgstr "Alarme"
 
-#: models.py:57
+#: models.py:59
 #, python-brace-format
 msgid "Alert (ID: {0}) for {1}"
 msgstr "Alarm (ID: {0}) für {1}"
 
 #: operators.py:50
-msgid "Equals to value"
-msgstr "Wert gleich"
+msgid "Equals"
+msgstr "Gleich"
 
 #: operators.py:59
-msgid "Lower than value"
-msgstr "Wert kleiner als"
+msgid "Lower than"
+msgstr "Kleiner als"
 
 #: operators.py:68
-msgid "Greater than value"
-msgstr "Wert größer als"
+msgid "Greater than"
+msgstr "Größer als"
+
+#~ msgid "Equals to value"
+#~ msgstr "Wert gleich"
