@@ -4,10 +4,8 @@ Changelog
 0.1.7 - 2016-02-11
 ------------------
 
-* This change includes a slight api change in the way how Alert.set and
-Alert.clear is called. In addtion, the way how waiting_period works is
-improved and more clear. A waiting_period of zero means immediate
-critical notification without warning.
+* This change includes a slight api change in the way how Alert.set and Alert.clear is called.
+* In addtion, the way how waiting_period works is improved and more clear. A waiting_period of zero means immediate critical notification without warning.
 
 
 0.1.6 - 2016-01-29
