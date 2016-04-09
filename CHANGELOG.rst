@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.1.8 - 2016-04-09
+------------------
+
+* change observer value from integer field to char field
+* extend observer get_alert_identifier method with kwargs
+
+
 0.1.7 - 2016-02-11
 ------------------
 
