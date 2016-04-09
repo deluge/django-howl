@@ -103,7 +103,7 @@ class Alert(models.Model):
     @classmethod
     def clear(cls, value=None, **kwargs):
         if 'observer' in kwargs:
-            identifier = kwargs['observer'].get_alert_identifier()
+            identifier = kwargs['observer'].get_alert_identifier(**kwargs)
         else:
             if 'identifier' not in kwargs:
                 raise ValueError('`observer` or `identifier` required.')
