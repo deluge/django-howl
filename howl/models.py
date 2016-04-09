@@ -12,7 +12,7 @@ class Observer(models.Model):
     name = models.CharField(_('Name'), max_length=255)
     operator = models.CharField(
         _('Operator type'), max_length=32, choices=get_operator_types())
-    value = models.IntegerField(_('Value'))
+    value = models.CharField(_('Value'), max_length=255)
     waiting_period = models.PositiveIntegerField(
         _('Waiting period'), help_text=_('In seconds'))
     alert_every_time = models.BooleanField(_('Alert every time'), default=False)
@@ -25,7 +25,10 @@ class Observer(models.Model):
     def __str__(self):
         return self.name
 
-    def get_alert_identifier(self):
+    def get_alert_identifier(self, **kwargs):
+        if kwargs.get('identifier', None):
+            return kwargs['identifier']
+
         return 'howl-observer:{0}'.format(self.pk)
 
     def get_alert(self, compare_value, **kwargs):
@@ -64,7 +67,7 @@ class Alert(models.Model):
     @classmethod
     def set(cls, value=None, **kwargs):
         if 'observer' in kwargs:
-            identifier = kwargs['observer'].get_alert_identifier()
+            identifier = kwargs['observer'].get_alert_identifier(**kwargs)
             waiting_period = kwargs['observer'].waiting_period
             alert_every_time = kwargs['observer'].alert_every_time
         else:

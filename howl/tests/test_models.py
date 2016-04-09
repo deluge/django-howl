@@ -17,6 +17,10 @@ class TestObserverModel:
         obj = ObserverFactory.create(name='test observer')
         assert obj.get_alert_identifier() == 'howl-observer:{0}'.format(obj.pk)
 
+    def test_alert_identifier_from_kwargs(self):
+        obj = ObserverFactory.create(name='test observer')
+        assert obj.get_alert_identifier(identifier='foo-bar') == 'foo-bar'
+
     @pytest.mark.parametrize('value, compare_value, count_objects', [
         (49, 50, 1),
         (50, 50, 0),
