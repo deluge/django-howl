@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.1.10 - 2016-04-09
+------------------
+
+* change observer value from char field to float field to avoid some compare errors
+
+
 0.1.9 - 2016-04-09
 ------------------
 

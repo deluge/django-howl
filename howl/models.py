@@ -12,7 +12,7 @@ class Observer(models.Model):
     name = models.CharField(_('Name'), max_length=255)
     operator = models.CharField(
         _('Operator type'), max_length=32, choices=get_operator_types())
-    value = models.CharField(_('Value'), max_length=255)
+    value = models.FloatField(_('Value'))
     waiting_period = models.PositiveIntegerField(
         _('Waiting period'), help_text=_('In seconds'))
     alert_every_time = models.BooleanField(_('Alert every time'), default=False)
