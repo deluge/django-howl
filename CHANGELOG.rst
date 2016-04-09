@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.1.11 - 2016-04-09
+------------------
+
+* added missing kwargs to get_alert_identifier method in Alert.clear
+
+
 0.1.10 - 2016-04-09
 ------------------
 
