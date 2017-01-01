@@ -2,12 +2,11 @@ import factory
 from factory.fuzzy import FuzzyChoice
 
 from howl.models import Alert, Observer
-from howl.operators import get_operator_types
 
 
 class ObserverFactory(factory.DjangoModelFactory):
     name = factory.Sequence(lambda i: 'observer {0}'.format(i))
-    operator = get_operator_types()[0][0]
+    operator = 'EqualOperator'
     value = 50.1
     waiting_period = 0
 

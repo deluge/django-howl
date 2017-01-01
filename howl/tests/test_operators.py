@@ -1,39 +1,7 @@
 import pytest
 
-from howl.operators import (
-    BaseOperator, EqualOperator, GreaterThanOperator, LowerThanOperator, add_operator_type,
-    get_operator_class)
+from howl.operators import BaseOperator, EqualOperator, GreaterThanOperator, LowerThanOperator
 from howl.tests.factories.observers import ObserverFactory
-
-
-class TestOperatorBasics:
-
-    def test_add_operator_type(self):
-        class Mock():
-            display_name = 'Mock operator'
-
-        assert add_operator_type(Mock) is True
-
-    @pytest.mark.parametrize('operator_class, return_value', [
-        (EqualOperator, False),
-        (GreaterThanOperator, False),
-        (LowerThanOperator, False),
-    ])
-    def test_add_operator_type_not_in_registry(self, operator_class, return_value):
-
-        assert add_operator_type(operator_class) is return_value
-
-    @pytest.mark.parametrize('operator_class, return_value', [
-        ('EqualOperator', EqualOperator),
-        ('GreaterThanOperator', GreaterThanOperator),
-        ('LowerThanOperator', LowerThanOperator),
-    ])
-    def test_get_operator_class(self, operator_class, return_value):
-        get_operator_class(operator_class) == return_value
-
-    def test_get_operator_class_not_exists(self):
-        with pytest.raises(KeyError):
-            get_operator_class('NotExists')
 
 
 @pytest.mark.django_db

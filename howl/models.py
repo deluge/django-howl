@@ -1,17 +1,57 @@
 from datetime import timedelta
 
+from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.db import models
 from django.utils import timezone
+from django.utils.functional import curry
 from django.utils.translation import ugettext_lazy as _
 
-from .operators import get_operator_class, get_operator_types
 from .signals import alert_clear, alert_notify, alert_wait
+
+
+try:
+    from django.utils.module_loading import import_string as import_by_path
+except ImportError:
+    from django.utils.module_loading import import_by_path
+
+
+def do_howl_operator_setup(cls, **kwargs):
+    operator_types = {}
+
+    all_extensions = (
+        'howl.operators.EqualOperator',
+        'howl.operators.LowerThanOperator',
+        'howl.operators.GreaterThanOperator',
+    ) + getattr(settings, 'HOWL_OPERATOR_EXTENSIONS', ())
+
+    for extension in all_extensions:
+        extension = import_by_path(extension)
+
+        extension_name = extension.__name__
+
+        if extension_name in operator_types:
+            raise ImproperlyConfigured(
+                'Operator extension named "{0}" already exists.'.format(
+                    extension_name))
+
+        operator_types[extension_name] = extension
+
+    choices = [(name, ext.display_name) for name, ext in operator_types.items()]
+
+    cls.operator_types = operator_types
+    cls.operator_choices = choices
+
+    operator = cls._meta.get_field('operator')
+    operator.choices.extend(cls.operator_choices)
+    operator.choices.sort(key=lambda item: item[0])
+
+    cls.get_operator_display = curry(cls._get_FIELD_display, field=operator)
 
 
 class Observer(models.Model):
     name = models.CharField(_('Name'), max_length=255)
-    operator = models.CharField(
-        _('Operator type'), max_length=32, choices=get_operator_types())
+    operator = models.CharField(_('Operator type'), max_length=32, choices=[])
     value = models.FloatField(_('Value'))
     waiting_period = models.PositiveIntegerField(
         _('Waiting period'), help_text=_('In seconds'))
@@ -32,7 +72,7 @@ class Observer(models.Model):
         return 'howl-observer:{0}'.format(self.pk)
 
     def get_alert(self, compare_value, **kwargs):
-        operator_class = get_operator_class(self.operator)
+        operator_class = self.operator_types[self.operator]
 
         if operator_class(self).compare(compare_value):
             Alert.clear(compare_value, observer=self, **kwargs)
