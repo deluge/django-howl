@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.1.12 - 2017-01-01
+------------------
+
+* refactor operator extension registration
+* extensions can added via ``HOWL_OPERATOR_EXTENSIONS`` setting
+
+
 0.1.11 - 2016-04-09
 ------------------
 
