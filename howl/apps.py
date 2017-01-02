@@ -7,7 +7,7 @@ class DjangoHowlConfig(AppConfig):
     verbose_name = _('Howl')
 
     def ready(self):
-        from howl.models import do_howl_operator_setup
+        from howl.models import do_operator_setup
 
         model = self.get_model('Observer')
-        do_howl_operator_setup(model)
+        do_operator_setup(model)

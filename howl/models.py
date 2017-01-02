@@ -5,41 +5,38 @@ from django.core.exceptions import ImproperlyConfigured
 from django.db import models
 from django.utils import timezone
 from django.utils.functional import curry
+from django.utils.module_loading import import_string
 from django.utils.translation import ugettext_lazy as _
 
+from .conf.settings import HOWL_OPERATORS
+from .operators import BaseOperator
 from .signals import alert_clear, alert_notify, alert_wait
 
 
-try:
-    from django.utils.module_loading import import_string as import_by_path
-except ImportError:
-    from django.utils.module_loading import import_by_path
+def do_operator_setup(cls, **kwargs):
+    operators = {}
 
+    for operator_path in getattr(settings, 'HOWL_OPERATORS', HOWL_OPERATORS):
+        operator_class = import_string(operator_path)
 
-def do_howl_operator_setup(cls, **kwargs):
-    operator_types = {}
+        if not issubclass(operator_class, BaseOperator):
+            raise TypeError(
+                'Operator "{0}" must be of type: "howl.operators.BaseOperator"'.format(
+                    operator_class))
 
-    all_extensions = (
-        'howl.operators.EqualOperator',
-        'howl.operators.LowerThanOperator',
-        'howl.operators.GreaterThanOperator',
-    ) + getattr(settings, 'HOWL_OPERATOR_EXTENSIONS', ())
+        operator_name = operator_class.__name__
 
-    for extension in all_extensions:
-        extension = import_by_path(extension)
-
-        extension_name = extension.__name__
-
-        if extension_name in operator_types:
+        if operator_name in operators:
             raise ImproperlyConfigured(
-                'Operator extension named "{0}" already exists.'.format(
-                    extension_name))
+                'Operator named "{0}" already exists.'.format(operator_name))
 
-        operator_types[extension_name] = extension
+        operators[operator_name] = operator_class
 
-    choices = [(name, ext.display_name) for name, ext in operator_types.items()]
+    choices = [
+        (name, operator_class.display_name) for name, operator_class in operators.items()
+    ]
 
-    cls.operator_types = operator_types
+    cls.operators = operators
     cls.operator_choices = choices
 
     operator = cls._meta.get_field('operator')
@@ -72,7 +69,7 @@ class Observer(models.Model):
         return 'howl-observer:{0}'.format(self.pk)
 
     def get_alert(self, compare_value, **kwargs):
-        operator_class = self.operator_types[self.operator]
+        operator_class = self.operators[self.operator]
 
         if operator_class(self).compare(compare_value):
             Alert.clear(compare_value, observer=self, **kwargs)
