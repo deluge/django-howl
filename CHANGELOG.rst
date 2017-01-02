@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.1.13 - 2017-01-02
+------------------
+
+* refactor operator
+* setting ``HOWL_OPERATOR_EXTENSIONS`` is renamed to ``HOWL_OPERATORS``
+
+
 0.1.12 - 2017-01-01
 ------------------
 
