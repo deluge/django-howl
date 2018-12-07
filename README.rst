@@ -1,14 +1,14 @@
 django-howl
 ===============
 
-.. image:: https://badge.fury.io/py/django-howl.png
-    :target: http://badge.fury.io/py/django-howl
+.. image:: https://badge.fury.io/py/django-howl.svg
+    :target: https://badge.fury.io/py/django-howl
 
 .. image:: https://travis-ci.org/deluge/django-howl.svg?branch=master
     :target: https://travis-ci.org/deluge/django-howl
 
-.. image:: https://coveralls.io/repos/deluge/django-howl/badge.svg?branch=master
-  :target: https://coveralls.io/github/deluge/django-howl?branch=master
+.. image:: https://codecov.io/gh/deluge/django-howl/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/deluge/django-howl
 
 .. image:: https://readthedocs.org/projects/django-howl/badge/?version=latest
   :target: http://django-howl.readthedocs.org/en/latest/?badge=latest
