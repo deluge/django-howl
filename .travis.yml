@@ -10,7 +10,7 @@ env:
   - DEPS="Django>=2.1,<2.2"
 
 install:
-  - pip install pipenv coveralls
+  - pip install pipenv codecov
   - pipenv install --dev
   - pipenv run pip install -e .
   - pipenv run pip install $DEPS
@@ -18,6 +18,4 @@ install:
 script: pipenv run py.test --cov
 
 after_success:
-  - pipenv install coveralls
-  - pipenv run coverage report
-  - pipenv run coveralls
+  - codecov
