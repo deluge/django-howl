@@ -9,9 +9,6 @@ env:
   - DEPS="Django>=2.0,<2.1"
   - DEPS="Django>=2.1,<2.2"
 
-before_install:
-	- pip install --upgrade pip
-
 install:
   - pip install pipenv coveralls
   - pipenv install --dev
