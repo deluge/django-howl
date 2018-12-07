@@ -1,7 +1,7 @@
 import pytest
 
 from howl.operators import BaseOperator, EqualOperator, GreaterThanOperator, LowerThanOperator
-from howl.tests.factories.observers import ObserverFactory
+from tests.factories.observers import ObserverFactory
 
 
 @pytest.mark.django_db

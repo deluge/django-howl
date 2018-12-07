@@ -1,8 +1,9 @@
-import mock
+from unittest import mock
+
 import pytest
 
 from howl.models import Alert
-from howl.tests.factories.observers import AlertFactory, ObserverFactory
+from tests.factories.observers import AlertFactory, ObserverFactory
 
 
 @pytest.mark.django_db

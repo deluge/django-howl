@@ -1,40 +1,27 @@
-.PHONY: tests coverage coverage-html devinstall docs clean
-APP=.
-COV=howl
-OPTS=-vs
+.PHONY: clean tests cov docs release
 
-help:
-	@echo "tests - run tests"
-	@echo "coverage - run tests with coverage enabled"
-	@echo "coverage-html - run tests with coverage html export enabled"
-	@echo "devinstall - install all packages required for development"
-	@echo "docs - generate Sphinx HTML documentation, including API docs"
-	@echo "clean - Clean build related files"
-
-
-tests:
-	py.test ${OPTS} ${APP}
-
-
-coverage:
-	py.test ${OPTS} --cov=$(COV) --cov-report=term-missing $(APP)
-
-
-coverage-html:
-	py.test ${OPTS} --cov=$(COV) --cov-report=term-missing --cov-report=html $(APP)
-
-
-devinstall:
-	pip install -e .
-	pip install -e .[tests]
-	pip install -e .[docs]
-
-docs: clean
-	$(MAKE) -C docs html
+VERSION = $(shell pipenv run python -c "print(__import__('howl').__version__)")
 
 clean:
-	rm -fr build/
-	rm -fr dist/
-	rm -fr *.egg-info
-	rm -fr htmlcov/
-	$(MAKE) -C docs clean
+	rm -fr docs/_build build/ dist/
+	pipenv run make -C docs clean
+
+tests:
+	pipenv run py.test --cov
+
+cov: tests
+	pipenv run coverage html
+	@echo open htmlcov/index.html
+
+apidoc:
+	pipenv run make -C docs apidoc
+
+docs:
+	pipenv run make -C docs html
+	@echo open docs/_build/html/index.html
+
+release:
+	@echo About to release ${VERSION}; read
+	pipenv run python setup.py sdist upload
+	pipenv run python setup.py bdist_wheel upload
+	git tag -a "${VERSION}" -m "Version ${VERSION}" && git push --follow-tags

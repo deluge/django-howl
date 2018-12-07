@@ -3,18 +3,21 @@ language: python
 python:
   - "3.4"
   - "3.5"
+  - "3.6"
 
 env:
-  - DJANGO_VERSION=1.8.x
-  - DJANGO_VERSION=1.9.x
+  - DEPS="Django>=1.11,<1.12"
+  - DEPS="Django>=2.0,<2.1"
+  - DEPS="Django>=2.1,<2.2"
 
 install:
-  - pip install tox
+  - pip install pipenv coveralls
+  - pipenv install --dev
+  - pipenv run pip install -e .
+  - pipenv run pip install $DEPS
 
-script:
-  - tox -e "$TRAVIS_PYTHON_VERSION-$DJANGO_VERSION"
+script: pipenv run py.test --cov
 
 after_success:
-  - pip install coveralls
   - coverage report
   - coveralls

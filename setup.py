@@ -1,84 +1,41 @@
 import os
-import sys
+from codecs import open
 
-from setuptools import find_packages, setup
-
-
-version = '0.1.13'
+from setuptools import setup, find_packages
 
 
-if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist upload')
-    os.system('python setup.py bdist_wheel upload')
-    print('You probably want to also tag the version now:')
-    print('  git tag -a %s -m "version %s"' % (version, version))
-    print('  git push --tags')
-    sys.exit()
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+VERSION = __import__('howl').__version__
 
 
-def read(*parts):
-    filename = os.path.join(os.path.dirname(__file__), *parts)
-    with open(filename) as fp:
-        return fp.read()
-
-
-tests_require = [
-    'coverage',
-    'mock',
-    'pytest',
-    'pytest-cov',
-    'pytest-pep8',
-    'pytest-flakes',
-    'pytest-isort',
-    'pytest-django',
-    'factory-boy',
-]
-
-
-docs_requires = [
-    'sphinx',
-    'sphinx_rtd_theme'
-]
+with open(os.path.join(BASE_DIR, 'README.rst'), encoding='utf-8') as f:
+    long_description = f.read()
 
 
 setup(
     name='django-howl',
+    version=VERSION,
     description='Django app to provide notifications in several ways',
-    long_description=read('README.rst'),
-    version=version,
-    license='BSD',
+    long_description=long_description,
+    url='https://github.com/deluge/django-howl',
+    project_urls={
+        'Bug Reports': 'https://github.com/deluge/django-howl/issues',
+        'Source': 'https://github.com/deluge/django-howl',
+    },
     author='Benjamin Banduhn, Stephan Jaekel',
     author_email='deluge@banduhn.com',
-    url='http://github.com/deluge/django-howl/',
-    packages=find_packages(exclude=[
-        'howl.tests',
-        'howl.tests.factories',
-        'examples',
-        'build',
-    ]),
-    test_suite='.',
-    tests_require=tests_require,
-    install_requires=[
-        'Django>=1.8,<1.10',
-    ],
-    extras_require={
-        'docs': docs_requires,
-        'tests': tests_require,
-    },
+    packages=find_packages(exclude=['tests', 'tests.*']),
+    install_requires=['Django>=1.11,<2.2'],
     include_package_data=True,
-    zip_safe=False,
+    keywords='django howl',
     classifiers=[
-        'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
+        'Framework :: Django',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Topic :: Software Development :: Libraries :: Python Modules',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: Implementation :: CPython',
-        'Framework :: Django',
+        'Programming Language :: Python :: 3.6',
     ],
 )
