@@ -18,5 +18,5 @@ install:
 script: pipenv run py.test --cov
 
 after_success:
-  - coverage report
+  - pipenv run coverage report
   - coveralls
