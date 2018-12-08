@@ -21,7 +21,8 @@ docs:
 	@echo open docs/_build/html/index.html
 
 release:
-	@echo About to release ${VERSION}; read
+	@echo About to release ${VERSION}
+	@echo [ENTER] to continue; read
 	pipenv run python setup.py sdist bdist_wheel
 	pipenv run twine upload dist/*
 	git tag -a "${VERSION}" -m "Version ${VERSION}" && git push --follow-tags
