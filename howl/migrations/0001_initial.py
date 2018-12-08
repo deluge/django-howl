@@ -41,6 +41,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='alert',
             name='observer',
-            field=models.ForeignKey(to='howl.Observer', verbose_name='Observer'),
+            field=models.ForeignKey(to='howl.Observer', verbose_name='Observer', on_delete=models.CASCADE),
         ),
     ]

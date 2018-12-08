@@ -5,6 +5,7 @@
 .coverage
 .cache
 .pytest_cache
+howl/settings.py
 htmlcov/
 dist/
 build/
