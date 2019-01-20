@@ -5,7 +5,7 @@ include setup.cfg
 
 recursive-include howl *.py
 recursive-include howl/locale *
-recursive-exclude howl/tests *
+recursive-exclude tests *
 recursive-exclude examples/ *
 recursive-exclude examples/example *
 recursive-exclude build/ *

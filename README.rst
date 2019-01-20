@@ -65,8 +65,7 @@ A Python 3.6 interpreter is required in addition to pipenv.
 .. code-block:: shell
 
     $ pipenv install --python 3.6 --dev
-    $ pipenv shell
-    $ pip install -e .
+    $ pipenv install -e .
 
 
 Now you're ready to run the tests:
