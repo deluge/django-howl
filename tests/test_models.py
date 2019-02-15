@@ -1,9 +1,38 @@
 from unittest import mock
 
 import pytest
+from django.core.exceptions import ImproperlyConfigured
 
-from howl.models import Alert
+from howl.models import Alert, do_operator_setup
 from tests.factories.observers import AlertFactory, ObserverFactory
+from tests.resources.models import OperatorTestModel
+
+
+@pytest.mark.django_db
+class TestOperatorSetup:
+
+    def test_is_not_subclass_base_operator(self, settings):
+        settings.HOWL_OPERATORS = (
+            'tests.resources.operators.NotSubclassOperator',
+        )
+        with pytest.raises(TypeError) as exc:
+            do_operator_setup(OperatorTestModel)
+
+        assert str(exc.value) == (
+            'Operator "<class \'tests.resources.operators.NotSubclassOperator\'>" '
+            'must be of type: "howl.operators.BaseOperator"'
+        )
+
+    def test_operator_already_exists(self, settings):
+        settings.HOWL_OPERATORS = (
+            'tests.resources.operators.TestOperator',
+            'tests.resources.operators.TestOperator',
+        )
+
+        with pytest.raises(ImproperlyConfigured) as exc:
+            do_operator_setup(OperatorTestModel)
+
+        assert str(exc.value) == 'Operator named "TestOperator" already exists.'
 
 
 @pytest.mark.django_db

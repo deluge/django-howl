@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
 
     'howl',
+    'tests',
 ]
 
 TEMPLATES = [{
