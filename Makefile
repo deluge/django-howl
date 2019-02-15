@@ -20,7 +20,7 @@ docs:
 	pipenv run make -C docs html
 	@echo open docs/_build/html/index.html
 
-release:
+release: clean
 	@echo About to release ${VERSION}
 	@echo [ENTER] to continue; read
 	pipenv run python setup.py sdist bdist_wheel
