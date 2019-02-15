@@ -1,6 +1,14 @@
 Changelog
 =========
 
+1.0.2 - 2019-02-15
+------------------
+
+* increase test coverage
+* update requirements and dev packages
+* use flake8 instead of pep8 and flakes
+
+
 1.0.1 - 2018-12-08
 ------------------
 
