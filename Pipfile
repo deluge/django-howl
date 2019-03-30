@@ -8,6 +8,7 @@ pytest = "*"
 pytest-isort = "*"
 pytest-django = "*"
 pytest-cov = "*"
+pytest-flake8 = "*"
 sphinx = "*"
 sphinx-rtd-theme = "*"
 factory-boy = "*"
@@ -16,7 +17,6 @@ twine = "*"
 [packages]
 django = "*"
 django-howl = {editable = true,path = "."}
-pytest-flake8 = "*"
 
 [requires]
 python_version = "3.6"
