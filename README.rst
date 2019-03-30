@@ -41,10 +41,10 @@ Installation
 
 .. code-block:: python
 
-    INSTALLED_APPS = (
+    INSTALLED_APPS = [
         # other apps
         'howl',
-    )
+    ]
 
 
 Usage
