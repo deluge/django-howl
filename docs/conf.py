@@ -5,7 +5,13 @@ import os
 import sys
 
 
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+
 sys.path.insert(0, os.path.abspath('..'))
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tests.settings")
+import django
+django.setup()
 
 extensions = [
     'sphinx.ext.autodoc',
@@ -86,4 +92,7 @@ inheritance_node_attrs = dict(shape='rect', fontsize=14, fillcolor='gray90',
 
 inheritance_edge_attrs = dict(penwidth=0.75)
 
-html_theme = 'sphinx_rtd_theme'
+if on_rtd:
+    html_theme = 'default'
+else:
+    html_theme = 'sphinx_rtd_theme'
