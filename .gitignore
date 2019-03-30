@@ -1,6 +1,7 @@
 *.py[cod]
 *.egg
 *.egg-info
+.sqlite3
 .DS_Store
 .coverage
 .cache
