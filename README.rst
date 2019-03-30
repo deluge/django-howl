@@ -18,10 +18,7 @@ django-howl
 What is django-howl
 -----------------------
 
-`django-howl` is a Django app to provide notifications in several ways.
-
-You can connect to the signals and do everything you want
-like sending notifications over different APIs.
+`django-howl` is a Django app where you can add custom observers and use them to check almost everything you want and pushes alerts to signals. You can connect to the signals and handle it in your way like sending notifications over different APIs.
 
 
 Requirements

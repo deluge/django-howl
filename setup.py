@@ -15,7 +15,10 @@ with open(os.path.join(BASE_DIR, 'README.rst'), encoding='utf-8') as f:
 setup(
     name='django-howl',
     version=VERSION,
-    description='Django app to observe anything you want and push notifications to signals.',
+    description=(
+        'Django app to observe almost everything you want and '
+        'pushes notifications to signals.'
+    ),
     long_description=long_description,
     url='https://github.com/deluge/django-howl',
     project_urls={
