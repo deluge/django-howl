@@ -1,9 +1,9 @@
-from django.views.generic import TemplateVIew
+from django.views.generic import TemplateView
 
 from pushover.models import Watchdog
 
 
-class SimpleView(TemplateVIew):
+class AlertView(TemplateView):
     template_name = 'pushover/index.html'
 
     def get_context_data(self, **kwargs):
@@ -12,12 +12,16 @@ class SimpleView(TemplateVIew):
         watchdog_list = []
 
         for watchdog in Watchdog.objects.all():
-            is_alert = watchdog.observer.compare(
+            is_valid = watchdog.observer.compare(
                 watchdog.number, watchdog=watchdog,
                 identifier='watchdog:{0}'.format(watchdog.pk)
             )
-            status = 'ALERT' if is_alert else 'OK'
-            watchdog_list.append('Watchdog ID:{0} - {1}'.format(watchdog.pk, status))
+
+            watchdog_list.append(
+                'Watchdog ID{0}: {1} with value {2} - {3}'.format(
+                    watchdog.pk, watchdog.observer.name,
+                    watchdog.number, 'OK' if is_valid else 'ALERT'
+                ))
 
         kwargs.update({
             'watchdog_list': watchdog_list,

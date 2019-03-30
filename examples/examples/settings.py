@@ -68,5 +68,5 @@ WSGI_APPLICATION = 'examples.wsgi.application'
 
 STATIC_URL = '/static/'
 
-PUSHOVER_TOKEN = ''
-PUSHOVER_RECIPIENT = ''
+PUSHOVER_TOKEN = os.environ.get('PUSHOVER_TOKEN', '')
+PUSHOVER_RECIPIENT = os.environ.get('PUSHOVER_RECIPIENT', '')

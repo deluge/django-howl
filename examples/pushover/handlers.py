@@ -13,7 +13,7 @@ def notify(level, instance, signal=None, **kwargs):
 
     api = PushoverApi(settings.PUSHOVER_TOKEN)
     api.send_notification(
-        settings.PUSHOVER_RECIPIENT_TERRARIUM, title, level, alert=instance, **kwargs)
+        settings.PUSHOVER_RECIPIENT, title, level, alert=instance, **kwargs)
 
 
 @receiver(alert_wait, sender=Alert)
