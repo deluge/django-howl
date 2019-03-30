@@ -15,7 +15,7 @@ with open(os.path.join(BASE_DIR, 'README.rst'), encoding='utf-8') as f:
 setup(
     name='django-howl',
     version=VERSION,
-    description='Django app to provide notifications in several ways',
+    description='Django app to observe anything you want and push notifications to signals.',
     long_description=long_description,
     url='https://github.com/deluge/django-howl',
     project_urls={
@@ -27,8 +27,9 @@ setup(
     packages=find_packages(exclude=['tests', 'tests.*']),
     install_requires=['Django>=1.11,<2.2'],
     include_package_data=True,
-    keywords='django howl',
+    keywords='django howl observer watchdog alert signal',
     classifiers=[
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
