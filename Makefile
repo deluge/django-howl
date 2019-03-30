@@ -17,7 +17,7 @@ apidoc:
 	pipenv run make -C docs apidoc
 
 docs:
-	pipenv run make -C docs html
+	pipenv run make -C docs linkcheck html
 	@echo open docs/_build/html/index.html
 
 release: clean

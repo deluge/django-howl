@@ -1,5 +1,9 @@
+*********
 Changelog
-=========
+*********
+
+1.0.x
+=====
 
 1.0.2 - 2019-02-15
 ------------------
@@ -22,28 +26,31 @@ Changelog
 * add support for django 2.x
 
 
+0.1.x
+=====
+
 0.1.13 - 2017-01-02
-------------------
+-------------------
 
 * refactor operator
 * setting ``HOWL_OPERATOR_EXTENSIONS`` is renamed to ``HOWL_OPERATORS``
 
 
 0.1.12 - 2017-01-01
-------------------
+-------------------
 
 * refactor operator extension registration
 * extensions can added via ``HOWL_OPERATOR_EXTENSIONS`` setting
 
 
 0.1.11 - 2016-04-09
-------------------
+-------------------
 
 * added missing kwargs to get_alert_identifier method in Alert.clear
 
 
 0.1.10 - 2016-04-09
-------------------
+-------------------
 
 * change observer value from char field to float field to avoid some compare errors
 

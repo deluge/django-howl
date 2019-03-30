@@ -1,7 +1,7 @@
 Installation
 ============
 
-* Install ``django-howl`` (or `download from PyPI <http://pypi.python.org/pypi/django-howl>`_):
+* Install ``django-howl`` (or :pypi:`download from PyPI <django-howl>`):
 
 .. code-block:: python
 
