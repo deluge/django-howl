@@ -28,7 +28,7 @@ setup(
     author='Benjamin Banduhn, Stephan Jaekel',
     author_email='deluge@banduhn.com',
     packages=find_packages(exclude=['examples', 'docs', 'tests', 'tests.*']),
-    install_requires=['Django>=1.11,<2.2'],
+    install_requires=['Django>=1.11,<2.3'],
     include_package_data=True,
     keywords='django howl observer watchdog alert signal',
     classifiers=[
