@@ -5,6 +5,13 @@ Changelog
 1.0.x
 =====
 
+1.0.4 - 2019-06-25
+------------------
+
+* increase Django version
+* update Pipfile.lock and test environment to avoid security issues
+
+
 1.0.3 - 2019-03-30
 ------------------
 
