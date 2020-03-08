@@ -7,8 +7,9 @@ python:
     - "3.6"
     - "3.7"
     - "3.8"
-
 env:
+    global:
+        PIPENV_IGNORE_VIRTUALENVS=1
     - DEPS="Django>=1.11,<1.12"
     - DEPS="Django>=2.0,<2.1"
     - DEPS="Django>=2.1,<2.2"
