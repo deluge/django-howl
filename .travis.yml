@@ -10,11 +10,12 @@ python:
 
 env:
     global:
-        PIPENV_IGNORE_VIRTUALENVS=1
-    - DEPS="Django>=1.11,<1.12"
-    - DEPS="Django>=2.0,<2.1"
-    - DEPS="Django>=2.1,<2.2"
-    - DEPS="Django>=2.2,<2.3"
+        - PIPENV_IGNORE_VIRTUALENVS=1
+    test_envs:
+        - DEPS="Django>=1.11,<1.12"
+        - DEPS="Django>=2.0,<2.1"
+        - DEPS="Django>=2.1,<2.2"
+        - DEPS="Django>=2.2,<2.3"
 
 install:
     - pip install pipenv codecov
