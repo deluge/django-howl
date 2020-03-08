@@ -11,7 +11,7 @@ python:
 env:
     global:
         - PIPENV_IGNORE_VIRTUALENVS=1
-    test_envs:
+    jobs:
         - DEPS="Django>=1.11,<1.12"
         - DEPS="Django>=2.0,<2.1"
         - DEPS="Django>=2.1,<2.2"
