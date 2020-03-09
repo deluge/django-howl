@@ -24,19 +24,19 @@ jobs:
           - python-version: "3.8"
             django-version: "2.1"
 
-        steps:
-          - uses: actions/checkout@v2
-          - name: Set up Python ${{ matrix.python-version }}
-            uses: actions/setup-python@v1
-            with:
-              python-version: ${{ matrix.python-version }}
-          - name: Update pip and install pipenv
-            run: |
-              python -m pip install --upgrade pip
-              pip install pipenv
-          - name: Install django-howl dev dependencies
-            run: |
-              pipenv install --dev
-          - name: Run tests for Python ${{ matrix.python-version }} -> Django ${{ matrix.django-version }}
-            run: |
-              pipenv run py.test --cov
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Update pip and install pipenv
+        run: |
+          python -m pip install --upgrade pip
+          pip install pipenv
+      - name: Install django-howl dev dependencies
+        run: |
+          pipenv install --dev
+      - name: Run tests for Python ${{ matrix.python-version }} -> Django ${{ matrix.django-version }}
+        run: |
+          pipenv run py.test --cov
