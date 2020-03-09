@@ -56,5 +56,5 @@ jobs:
           pipenv install --dev
       - name: Make coverage and upload to codecov
         run: |
-          pipenv run py.test --cov=./howl/ --cov-report=xml
+          pipenv run py.test --cov
           codecov -t ${{ secrets.CODECOV_TOKEN }}
