@@ -57,4 +57,4 @@ jobs:
       - name: Make coverage and upload to codecov
         run: |
           pipenv run py.test --cov
-          codecov
+          codecov -t ${{ secrets.CODECOV_TOKEN }}
