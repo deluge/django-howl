@@ -4,8 +4,10 @@ django-howl
 .. image:: https://badge.fury.io/py/django-howl.svg
     :target: https://badge.fury.io/py/django-howl
 
-.. image:: https://travis-ci.org/deluge/django-howl.svg?branch=master
-    :target: https://travis-ci.org/deluge/django-howl
+.. image:: https://github.com/deluge/django-howl/workflows/Testing/badge.svg?branch=master
+    :target: https://github.com/deluge/django-howl/actions?query=workflow%3ATesting
+
+![Testing](https://github.com/deluge/django-howl/workflows/Testing/badge.svg?branch=master)
 
 .. image:: https://codecov.io/gh/deluge/django-howl/branch/master/graph/badge.svg
   :target: https://codecov.io/gh/deluge/django-howl
