@@ -6,6 +6,7 @@
 .coverage
 .cache
 .pytest_cache
+coverage.xml
 howl/settings.py
 htmlcov/
 dist/
