@@ -5,6 +5,14 @@ Changelog
 1.0.x
 =====
 
+1.0.5 - 2020-03-15
+------------------
+
+* add support for python 3.7 and 3.8
+* update Pipfile.lock and test environment to avoid security issues
+* use github actions
+
+
 1.0.4 - 2019-06-25
 ------------------
 
