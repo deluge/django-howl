@@ -20,9 +20,6 @@ docs:
 	pipenv run make -C docs linkcheck html
 	@echo open docs/_build/html/index.html
 
-release: clean
+release-tag: clean
 	@echo About to release ${VERSION}
-	@echo [ENTER] to continue; read
-	pipenv run python setup.py sdist bdist_wheel
-	pipenv run twine upload dist/*
 	git tag -a "${VERSION}" -m "Version ${VERSION}" && git push --follow-tags
