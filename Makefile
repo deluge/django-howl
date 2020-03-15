@@ -22,4 +22,4 @@ docs:
 
 release-tag: clean
 	@echo About to release ${VERSION}
-	git tag -a "${VERSION}" -m "Version ${VERSION}" && git push --follow-tags
+	git tag -a "v${VERSION}" -m "Version ${VERSION}" && git push --follow-tags
