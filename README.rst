@@ -57,18 +57,23 @@ with it.
 Prepare for development
 -----------------------
 
-A Python 3.6 interpreter is required in addition to pipenv.
+A Python 3 interpreter is required. If you use pyenv with a virtualenv, follow the next steps
 
 .. code-block:: shell
 
-    $ pipenv install --python 3.6 --dev
+    $ cd /path/to/project-root/
+    $ mkvirtualenv django-howl
+    # activate virtualenv, if not activated yet
+    # and install all dev requirements:
+    $ pip install -r dev-requirements.txt
+    $ pip install -e .
 
 
 Now you're ready to run the tests:
 
 .. code-block:: shell
 
-    $ pipenv run py.test
+    $ py.test
 
 
 Resources

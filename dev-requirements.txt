@@ -1,0 +1,8 @@
+pytest
+pytest-isort
+pytest-django
+pytest-cov
+pytest-flake8
+sphinx
+sphinx-rtd-theme
+factory-boy

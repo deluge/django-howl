@@ -1,23 +1,23 @@
-.PHONY: clean tests cov docs release
+.PHONY: clean tests cov docs release-tag
 
-VERSION = $(shell pipenv run python -c "print(__import__('howl').__version__)")
+VERSION = $(shell python -c "print(__import__('howl').__version__)")
 
 clean:
 	rm -fr docs/_build build/ dist/
-	pipenv run make -C docs clean
+	make -C docs clean
 
 tests:
-	pipenv run py.test --cov
+	py.test --cov
 
 cov: tests
-	pipenv run coverage html
+	coverage html
 	@echo open htmlcov/index.html
 
 apidoc:
-	pipenv run make -C docs apidoc
+	make -C docs apidoc
 
 docs:
-	pipenv run make -C docs linkcheck html
+	make -C docs linkcheck html
 	@echo open docs/_build/html/index.html
 
 release-tag: clean
