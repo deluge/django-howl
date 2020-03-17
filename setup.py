@@ -12,6 +12,18 @@ with open(os.path.join(BASE_DIR, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 
+dev_require = [
+    'pytest',
+    'pytest-isort',
+    'pytest-django',
+    'pytest-cov',
+    'pytest-flake8',
+    'sphinx',
+    'sphinx-rtd-theme',
+    'factory-boy',
+]
+
+
 setup(
     name='django-howl',
     version=VERSION,
@@ -29,6 +41,9 @@ setup(
     author_email='deluge@banduhn.com',
     packages=find_packages(exclude=['examples', 'docs', 'tests', 'tests.*']),
     install_requires=['Django>=1.11,<2.3'],
+    extras_require={
+        'dev': dev_require,
+    },
     include_package_data=True,
     keywords='django howl observer watchdog alert signal',
     classifiers=[
