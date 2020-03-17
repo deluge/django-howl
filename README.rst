@@ -65,8 +65,7 @@ A Python 3 interpreter is required. If you use pyenv with a virtualenv, follow t
     $ mkvirtualenv django-howl
     # activate virtualenv, if not activated yet
     # and install all dev requirements:
-    $ pip install -r dev-requirements.txt
-    $ pip install -e .
+    $ pip install -e .[dev]
 
 
 Now you're ready to run the tests:
