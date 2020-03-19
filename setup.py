@@ -13,14 +13,17 @@ with open(os.path.join(BASE_DIR, 'README.rst'), encoding='utf-8') as f:
 
 
 dev_require = [
-    'pytest',
-    'pytest-isort',
-    'pytest-django',
-    'pytest-cov',
-    'pytest-flake8',
-    'sphinx',
-    'sphinx-rtd-theme',
-    'factory-boy',
+    'factory-boy>=2.11',
+    'pytest>=5.4.1',
+    'pytest-black>=0.3.8',
+    'pytest-cov>=2.8.1',
+    'pytest-django>=3.8.0',
+    'pytest-flake8>=1.0.4',
+    'pytest-isort>=0.3.1',
+    'sphinx>=2.4.4',
+    'sphinx-rtd-theme==0.4.3',
+    'freezegun>=0.3',
+    'vcrpy>=2.1.0'
 ]
 
 

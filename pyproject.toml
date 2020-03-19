@@ -1,0 +1,12 @@
+[tool.black]
+exclude = '(/migrations/)|(/node_modules/)'
+
+[tool.isort]
+known_first_party = ['howl']
+sections = ['FUTURE', 'STDLIB', 'THIRDPARTY', 'FIRSTPARTY', 'LOCALFOLDER']
+default_section = 'THIRDPARTY'
+skip_glob = ['**/migrations/**', '**/node_modules/**']
+line_length = 88
+use_parantheses = 'True'
+include_trailing_comma = 'True'
+multi_line_output = 4

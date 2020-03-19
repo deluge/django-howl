@@ -6,21 +6,25 @@ clean:
 	rm -fr docs/_build build/ dist/
 	make -C docs clean
 
-tests:
-	py.test --cov
+auto-black-isort:
+	black examples howl tests
+	isort examples howl tests --recursive
+
+tests: clean
+	py.test
 
 cov: tests
 	coverage html
 	@echo open htmlcov/index.html
 
-apidoc:
+apidoc: clean
 	make -C docs apidoc
 
-docs:
+docs: clean
 	make -C docs linkcheck html
 	@echo open docs/_build/html/index.html
 
-release-tag: clean
+release-tag:
 	@echo About to release ${VERSION}
 	@echo [ENTER] to continue; read
 	git tag -a "v${VERSION}" -m "Version v${VERSION}" && git push --follow-tags
