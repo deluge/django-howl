@@ -6,9 +6,9 @@ clean:
 	rm -fr docs/_build build/ dist/
 	make -C docs clean
 
-auto-black-isort:
-	black examples howl tests
-	isort examples howl tests --recursive
+format-python-code:
+	isort -rc .
+	black .
 
 tests: clean
 	py.test
