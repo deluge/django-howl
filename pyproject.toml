@@ -1,6 +1,7 @@
 [tool.black]
 target-version = ['py35', 'py36', 'py37', 'py38']
 exclude = '(/migrations/)|(/node_modules/)|(howl/settings.py)'
+skip-numeric-underscore-normalization = true
 
 [tool.isort]
 known_first_party = ['howl']
