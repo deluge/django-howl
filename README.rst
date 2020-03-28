@@ -14,6 +14,10 @@ django-howl
   :target: http://django-howl.readthedocs.org/en/latest/?badge=latest
   :alt: Documentation Status
 
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+  :target: https://github.com/psf/black
+  :alt: Code style: black
+
 
 What is django-howl
 -------------------
@@ -73,6 +77,16 @@ Now you're ready to run the tests:
 .. code-block:: shell
 
     $ py.test
+
+
+Code style
+----------
+
+This project is styled by `black <https://github.com/psf/black/>` and `isort <https://github.com/timothycrosley/isort/>`. You can use the following command to format the code automatically and make it black and isort compatible:
+
+.. code-block:: shell
+
+    $ make format-python-code
 
 
 Resources
