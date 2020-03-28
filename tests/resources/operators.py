@@ -6,7 +6,7 @@ class NotSubclassOperator(object):
 
 
 class TestOperator(BaseOperator):
-    display_name = 'Test Operator'
+    display_name = "Test Operator"
 
     def compare(self, compare_value):
         return compare_value > self.testmodel.value

@@ -5,4 +5,4 @@ from .models import Watchdog
 
 @admin.register(Watchdog)
 class WatchdogAdmin(admin.ModelAdmin):
-    list_display = ('observer', 'number')
+    list_display = ("observer", "number")

@@ -5,8 +5,8 @@ from howl.models import Alert, Observer
 
 
 class ObserverFactory(factory.DjangoModelFactory):
-    name = factory.Sequence(lambda i: 'observer {0}'.format(i))
-    operator = 'EqualOperator'
+    name = factory.Sequence(lambda i: "observer {0}".format(i))
+    operator = "EqualOperator"
     value = 50.1
     waiting_period = 0
 
@@ -15,7 +15,7 @@ class ObserverFactory(factory.DjangoModelFactory):
 
 
 class AlertFactory(factory.DjangoModelFactory):
-    identifier = factory.Sequence(lambda i: 'alert-{0}')
+    identifier = factory.Sequence(lambda i: "alert-{0}")
     value = FuzzyChoice(range(1, 10))
 
     class Meta:

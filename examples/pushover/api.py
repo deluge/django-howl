@@ -12,32 +12,35 @@ class PushoverException(requests.RequestException):
 
 
 class PushoverApi(object):
-
     def __init__(self, app_token):
         self.app_token = app_token
 
     def send_message(self, params):
-        params.update({'token': self.app_token})
+        params.update({"token": self.app_token})
 
         try:
-            response = requests.post('https://api.pushover.net/1/messages.json', params=params)
+            response = requests.post(
+                "https://api.pushover.net/1/messages.json", params=params
+            )
             return response
         except requests.RequestException as exc:
             raise PushoverException(exc, response=exc.response)
 
     def send_notification(self, recipient, title, template, **context):
         params = {
-            'message': render_to_string('pushover/{0}.txt'.format(template), context).strip(),
-            'title': title,
-            'user': recipient,
+            "message": render_to_string(
+                "pushover/{0}.txt".format(template), context
+            ).strip(),
+            "title": title,
+            "user": recipient,
         }
         response = self.send_message(params)
 
         if not response.ok:
             try:
-                errors = ', '.join(response.json()['errors'])
+                errors = ", ".join(response.json()["errors"])
             except ValueError:
-                errors = 'Unkown error'
+                errors = "Unkown error"
             logger.critical(errors)
             raise PushoverException(errors, response=response)
 
