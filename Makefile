@@ -8,7 +8,7 @@ clean:
 
 format-python-code:
 	isort -rc .
-	black .
+	black -q .
 
 tests: clean
 	py.test
