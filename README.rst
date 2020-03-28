@@ -82,7 +82,7 @@ Now you're ready to run the tests:
 Code style
 ----------
 
-This project is styled by `black <https://github.com/psf/black/>` and `isort <https://github.com/timothycrosley/isort/>`. You can use the following command to format the code automatically and make it black and isort compatible:
+This project is styled by `black <https://github.com/psf/black/>`_ and `isort <https://github.com/timothycrosley/isort/>`_. You can use the following command to format the code automatically and make it black and isort compatible:
 
 .. code-block:: shell
 
