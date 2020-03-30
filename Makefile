@@ -1,4 +1,4 @@
-.PHONY: clean tests cov docs release-tag
+.PHONY: clean format-python-code tests cov apidoc docs release-tag
 
 VERSION = $(shell python -c "print(__import__('howl').__version__)")
 
@@ -10,7 +10,7 @@ format-python-code:
 	isort -rc .
 	black -q .
 
-tests: clean
+tests:
 	py.test
 
 cov: tests
