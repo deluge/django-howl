@@ -27,7 +27,9 @@ class AlertView(TemplateView):
             )
 
         kwargs.update(
-            {"watchdog_list": watchdog_list,}
+            {
+                "watchdog_list": watchdog_list,
+            }
         )
 
         return kwargs

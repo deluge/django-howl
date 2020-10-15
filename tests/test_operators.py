@@ -1,5 +1,4 @@
 import pytest
-from tests.factories.observers import ObserverFactory
 
 from howl.operators import (
     BaseOperator,
@@ -7,6 +6,7 @@ from howl.operators import (
     GreaterThanOperator,
     LowerThanOperator,
 )
+from tests.factories.observers import ObserverFactory
 
 
 @pytest.mark.django_db

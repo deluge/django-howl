@@ -28,8 +28,8 @@ What is django-howl
 Requirements
 ------------
 
-django-howl supports Python 3 only and requires at least Django 1.11.
-If you need support for Django 1.8.x or 1.9.x have a look at django-howl < 1.0.0
+django-howl supports Python 3 only and requires at least Django 2.2.
+If you need support for Django versions have a look at django-howl < 1.0.0
 
 
 Installation

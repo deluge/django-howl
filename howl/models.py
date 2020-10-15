@@ -1,12 +1,12 @@
 from datetime import timedelta
+from functools import partial
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.db import models
 from django.utils import timezone
-from django.utils.functional import curry
 from django.utils.module_loading import import_string
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from .conf.settings import HOWL_OPERATORS
 from .operators import BaseOperator
@@ -47,7 +47,7 @@ def do_operator_setup(cls, **kwargs):
     operator.choices.extend(cls.operator_choices)
     operator.choices.sort(key=lambda item: item[0])
 
-    cls.get_operator_display = curry(cls._get_FIELD_display, field=operator)
+    cls.get_operator_display = partial(cls._get_FIELD_display, field=operator)
 
 
 class Observer(models.Model):

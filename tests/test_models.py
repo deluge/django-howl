@@ -2,10 +2,10 @@ from unittest import mock
 
 import pytest
 from django.core.exceptions import ImproperlyConfigured
-from tests.factories.observers import AlertFactory, ObserverFactory
-from tests.resources.models import OperatorTestModel
 
 from howl.models import Alert, do_operator_setup
+from tests.factories.observers import AlertFactory, ObserverFactory
+from tests.resources.models import OperatorTestModel
 
 
 @pytest.mark.django_db
@@ -48,7 +48,12 @@ class TestObserverModel:
         assert obj.get_alert_identifier(identifier="foo-bar") == "foo-bar"
 
     @pytest.mark.parametrize(
-        "value, compare_value, count_objects", [(49, 50, 1), (50, 50, 0), (51, 50, 1),]
+        "value, compare_value, count_objects",
+        [
+            (49, 50, 1),
+            (50, 50, 0),
+            (51, 50, 1),
+        ],
     )
     def test_get_alert(self, value, compare_value, count_objects):
         obj = ObserverFactory.create(value=value)
@@ -62,7 +67,11 @@ class TestObserverModel:
 
     @pytest.mark.parametrize(
         "value, compare_value, return_value, count_objects",
-        [(49, 50, False, 1), (50, 50, True, 0), (51, 50, False, 1),],
+        [
+            (49, 50, False, 1),
+            (50, 50, True, 0),
+            (51, 50, False, 1),
+        ],
     )
     def test_compare(self, value, compare_value, return_value, count_objects):
         obj = ObserverFactory.create(value=value)

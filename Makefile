@@ -3,11 +3,10 @@
 VERSION = $(shell python -c "print(__import__('howl').__version__)")
 
 clean:
-	rm -fr docs/_build build/ dist/
-	make -C docs clean
+	rm -fr docs/_build docs/api build/ dist/
 
 format-python-code:
-	isort -rc .
+	isort .
 	black -q .
 
 tests:
@@ -17,11 +16,11 @@ cov: tests
 	coverage html
 	@echo open htmlcov/index.html
 
-apidoc: clean
-	make -C docs apidoc
+apidoc:
+	make -C docs clean apidoc
 
-docs: clean
-	make -C docs linkcheck html
+docs:
+	make -C docs clean linkcheck html
 	@echo open docs/_build/html/index.html
 
 release-tag:

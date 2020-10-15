@@ -1,11 +1,12 @@
-import factory
+from factory import Sequence
+from factory.django import DjangoModelFactory
 from factory.fuzzy import FuzzyChoice
 
 from howl.models import Alert, Observer
 
 
-class ObserverFactory(factory.DjangoModelFactory):
-    name = factory.Sequence(lambda i: "observer {0}".format(i))
+class ObserverFactory(DjangoModelFactory):
+    name = Sequence(lambda i: "observer {0}".format(i))
     operator = "EqualOperator"
     value = 50.1
     waiting_period = 0
@@ -14,8 +15,8 @@ class ObserverFactory(factory.DjangoModelFactory):
         model = Observer
 
 
-class AlertFactory(factory.DjangoModelFactory):
-    identifier = factory.Sequence(lambda i: "alert-{0}")
+class AlertFactory(DjangoModelFactory):
+    identifier = Sequence(lambda i: "alert-{0}")
     value = FuzzyChoice(range(1, 10))
 
     class Meta:

@@ -2,6 +2,18 @@
 Changelog
 *********
 
+1.1.x
+=====
+
+1.1.0 - 2020-10-15
+------------------
+
+* add support for python 3.9
+* add support for django 3.0 and 3.1
+* drop support for python < 3.6
+* drop support for django < 2.2
+
+
 1.0.x
 =====
 

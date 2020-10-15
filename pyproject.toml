@@ -1,14 +1,61 @@
+[tool.pytest.ini_options]
+minversion = 6.0
+addopts = "-vs --tb=short --black --isort --flake8  --nomigrations -p no:doctest"
+
+testpaths = [
+	"howl/",
+	"tests/",
+]
+
+python_files = [
+	"test_*.py",
+]
+
+flake8-max-line-length = 88
+
+flake8-ignore = [
+	"docs/conf.py ALL",
+	"**/__init__.py F401,F403",
+	"**/apps.py F401",
+	"*settings.py F401 F403 F405",
+	"*node_modules/*.py ALL",
+	"*migrations/*.py ALL",
+	"*.py E128 E231",
+]
+
+DJANGO_SETTINGS_MODULE = "tests.settings"
+
 [tool.black]
-target-version = ['py35', 'py36', 'py37', 'py38']
-exclude = '(/migrations/)|(/node_modules/)|(howl/settings.py)'
+target-version = ["py35", "py36", "py37", "py38"]
+exclude = "(/migrations/)|(/node_modules/)|(howl/settings.py)"
 skip-numeric-underscore-normalization = true
 
 [tool.isort]
-known_first_party = ['howl']
-sections = ['FUTURE', 'STDLIB', 'THIRDPARTY', 'FIRSTPARTY', 'LOCALFOLDER']
-default_section = 'THIRDPARTY'
-skip_glob = ['**/migrations/**', '**/node_modules/**']
+known_first_party = ["howl"]
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+default_section = "THIRDPARTY"
+skip_glob = ["docs/conf.py", "**/migrations/**", "**/node_modules/**"]
 line_length = 88
-use_parantheses = true
+use_parentheses = true
 include_trailing_comma = true
 multi_line_output = 3
+lines_after_imports = 2
+
+[tool.coverage.run]
+branch = true
+include = [
+	"./*",
+]
+
+omit = [
+	"howl/settings.py",
+	"tests/*",
+	"*/__init__.py",
+	"*migrations*",
+	"*setup.py",
+]
+
+[rool.coverage.report]
+exclude_lines = [
+	"raise NotImplementedError",
+]
