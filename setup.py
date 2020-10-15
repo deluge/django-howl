@@ -12,21 +12,6 @@ with open(os.path.join(BASE_DIR, "README.rst"), encoding="utf-8") as f:
     long_description = f.read()
 
 
-dev_require = [
-    "factory-boy>=2.11",
-    "pytest>=5.4.1",
-    "pytest-black>=0.3.8",
-    "pytest-cov>=2.8.1",
-    "pytest-django>=3.8.0",
-    "pytest-flake8>=1.0.4",
-    "pytest-isort>=0.3.1",
-    "sphinx>=2.4.4",
-    "sphinx-rtd-theme==0.4.3",
-    "freezegun>=0.3",
-    "vcrpy>=2.1.0",
-]
-
-
 setup(
     name="django-howl",
     version=VERSION,
@@ -43,8 +28,21 @@ setup(
     author="Benjamin Banduhn, Stephan Jaekel",
     author_email="deluge@banduhn.com",
     packages=find_packages(exclude=["examples", "docs", "tests", "tests.*"]),
-    install_requires=["Django>=1.11,<2.3"],
-    extras_require={"dev": dev_require,},
+    install_requires=["Django>=2.2,<3.3"],
+    extras_require={"dev": [
+        "coverage[toml]>=5.3",
+        "factory-boy>=3.1.0",
+        "freezegun>=1.0.0",
+        "pytest>=6.1.1",
+        "pytest-black>=0.3.12",
+        "pytest-cov>=2.10.1",
+        "pytest-django>=3.10.0",
+        "pytest-flake8>=1.0.6",
+        "pytest-isort>=1.2.0",
+        "sphinx>=3.2.1",
+        "sphinx-rtd-theme==0.5.0",
+        "vcrpy>=4.1.1",
+    ],},
     include_package_data=True,
     keywords="django howl observer watchdog alert signal",
     classifiers=[
@@ -58,5 +56,6 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
     ],
 )
